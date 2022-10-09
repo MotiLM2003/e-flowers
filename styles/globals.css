@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .default-container {
+    @apply max-w-screen-xl xl:max-w-screen-2xl  mx-auto  w-full;
+  }
+  .toolbar-card {
+    @apply bg-gray-200 p-2 rounded-lg  md:w-[200px] flex justify-center shadow hover:bg-white hover:shadow-lg transition duration-150 cursor-pointer;
+  }
+
+  .suggestions-image {
+    @apply w-[200px] md:w-[150px] h-[120px] relative rounded-lg overflow-hidden border flex-shrink-0;
+  }
+}
+
+body {
+  direction: rtl;
+}
