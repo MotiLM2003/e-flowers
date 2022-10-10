@@ -6,11 +6,14 @@ import notifications from '../../images/notifications.png';
 import account from '../../images/account.png';
 import Cookies from 'universal-cookie';
 import MenuIcon from '../MenuIcon/Menu';
+import LoginAndRegisterModel from '../LoginAndRegisterModel/LoginAndRegisterModel';
 
 const cookies = new Cookies();
 
 const Header = () => {
   const [menuId, setMenuId] = useState(0);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const openLogin = () => setIsLoginOpen(true);
   const handleMenuId = (id: number) => {
     setMenuId(id);
     cookies.set('menuId', id, { path: '/' });
@@ -43,11 +46,14 @@ const Header = () => {
             <div className=' cursor-pointer'>
               <Image src={notifications} alt='Logo' />
             </div>
-            <div className='hidden  md:flex flex-col justify-center items-center  cursor-pointer'>
+            <div
+              className=' flex flex-col justify-center items-center  cursor-pointer'
+              onClick={() => setIsLoginOpen(true)}
+            >
               <div>
                 <Image src={account} alt='Logo' />
               </div>
-              <div className='text-xs'>התחבר \ הרשם</div>
+              <div className='hidden md:block text-xs'>התחבר \ הרשם</div>
             </div>
             <div className='md:hidden'>
               <MenuIcon />
@@ -119,6 +125,12 @@ const Header = () => {
           אודות
         </div>
       </nav>
+      <LoginAndRegisterModel
+        isOpen={isLoginOpen}
+        onClose={() => {
+          setIsLoginOpen(false);
+        }}
+      />
     </header>
   );
 };

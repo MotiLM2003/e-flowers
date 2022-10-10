@@ -9,7 +9,7 @@ const Suggestions = () => {
         <div className='basis-1/2'>
           <p className='text-orange-300 mb-1'>שלומית לוי</p>
           <p className='text-secondary'>
-            שלום רב, אשמח אם תעזרו לי לזאות <br /> את הפרח היפה הזה :) <br />
+            שלום רב, אשמח אם תעזרו לי לזהות <br /> את הפרח היפה הזה :) <br />
             תודה.
           </p>
         </div>
