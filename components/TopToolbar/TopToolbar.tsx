@@ -11,7 +11,7 @@ const TopToolbar = () => {
           <div>
             <Image src={camara} alt='Camara' />
           </div>
-          <div className='text-blue-800 font-bold font-xl'>זיהוי צמח</div>
+          <div className='text-secondary font-bold font-xl'>זיהוי צמח</div>
           <div className='text-sm'>זיהוי AI/קהילה</div>
         </div>
       </div>
@@ -20,7 +20,7 @@ const TopToolbar = () => {
           <div>
             <Image src={glass} alt='Camara' />
           </div>
-          <div className='text-blue-800 font-bold font-xl'>מנוע חיפוש</div>
+          <div className='text-secondary font-bold font-xl'>מנוע חיפוש</div>
         </div>
       </div>
       <div className='toolbar-card'>
@@ -28,7 +28,7 @@ const TopToolbar = () => {
           <div>
             <Image src={link} alt='Camara' />
           </div>
-          <div className='text-blue-800 font-bold font-xl'>שיתוף</div>
+          <div className='text-secondary font-bold font-xl'>שיתוף</div>
           <div className='text-sm'>תצפית\תמונות\פריחה\טיול</div>
         </div>
       </div>

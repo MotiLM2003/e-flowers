@@ -2,15 +2,17 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Layout from '../components/Layout/Layout';
+import LoginAndRegisterModel from '../components/LoginAndRegisterModel/LoginAndRegisterModel';
 import Suggestions from '../components/Suggestions/Suggestions';
 import TopToolbar from '../components/TopToolbar/TopToolbar';
+
 const Home: NextPage = () => {
   return (
     <Layout>
       <div className='default-container'>
         <TopToolbar />
         <div className='flex justify-center mt-5  md:mt-20'>
-          <p className='font-bold text-blue-900  border-b-2 border-b-orange-300 mb-7 '>
+          <p className='font-bold text-secondary  border-b-2 border-b-orange-300 mb-7 '>
             עזרו לקהילה לזהות
           </p>
         </div>
@@ -19,7 +21,7 @@ const Home: NextPage = () => {
           <Suggestions />
           <Suggestions />
           <div className='flex justify-center mt-5  md:mt-20'>
-            <p className='font-bold text-blue-900  border-b-2 border-b-orange-300 mb-7 '>
+            <p className='font-bold text-secondary  border-b-2 border-b-orange-300 mb-7 '>
               שיתופי תצפיות
             </p>
           </div>
@@ -28,7 +30,7 @@ const Home: NextPage = () => {
           <Suggestions />
           <Suggestions />
           <div className='flex justify-center mt-5  md:mt-20'>
-            <p className='font-bold text-blue-900  border-b-2 border-b-orange-300 mb-7 '>
+            <p className='font-bold text-secondary  border-b-2 border-b-orange-300 mb-7 '>
               עדכונים חמים
             </p>
           </div>
@@ -36,6 +38,7 @@ const Home: NextPage = () => {
           <Suggestions />
           <Suggestions />
         </div>
+        <LoginAndRegisterModel isOpen={false} onClose={() => {}} />
       </div>
     </Layout>
   );

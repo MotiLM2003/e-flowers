@@ -8,7 +8,7 @@ const Suggestions = () => {
       <div className='flex flex-col md:flex-row  p-2'>
         <div className='basis-1/2'>
           <p className='text-orange-300 mb-1'>שלומית לוי</p>
-          <p className='text-blue-900'>
+          <p className='text-secondary'>
             שלום רב, אשמח אם תעזרו לי לזאות <br /> את הפרח היפה הזה :) <br />
             תודה.
           </p>
@@ -53,7 +53,7 @@ const Suggestions = () => {
               alt='example '
             />
           </div>
-          <div className='flex gap-1 flex-row-reverse items-center  cursor-pointer'>
+          <div className='flex gap-1 flex-row-reverse items-center cursor-pointer'>
             <div className='relative h-[16px] w-[16px] flex'>
               <Image
                 objectFit='contain'

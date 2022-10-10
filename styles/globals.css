@@ -6,6 +6,10 @@
   .default-container {
     @apply max-w-screen-xl xl:max-w-screen-2xl  mx-auto  w-full;
   }
+
+  .input {
+    @apply bg-gray-100 rounded p-[.4rem];
+  }
   .toolbar-card {
     @apply bg-gray-200 p-2 rounded-lg  md:w-[200px] flex justify-center shadow hover:bg-white hover:shadow-lg transition duration-150 cursor-pointer;
   }
