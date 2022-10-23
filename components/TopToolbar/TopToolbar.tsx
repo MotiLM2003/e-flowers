@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import camara from '../../images/camara.png';
 import glass from '../../images/glass.png';
@@ -16,12 +17,14 @@ const TopToolbar = () => {
         </div>
       </div>
       <div className='toolbar-card'>
-        <div className='flex flex-col items-center justify-center p-2'>
-          <div>
-            <Image src={glass} alt='Camara' />
+        <Link href='/search'>
+          <div className='flex flex-col items-center justify-center p-2'>
+            <div>
+              <Image src={glass} alt='Camara' />
+            </div>
+            <div className='text-secondary font-bold font-xl'>מנוע חיפוש</div>
           </div>
-          <div className='text-secondary font-bold font-xl'>מנוע חיפוש</div>
-        </div>
+        </Link>
       </div>
       <div className='toolbar-card'>
         <div className='flex flex-col items-center justify-center p-2'>

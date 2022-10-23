@@ -17,6 +17,7 @@ import {
   TabPanels,
   TabPanel,
 } from '@chakra-ui/react';
+import Register from '../Register/Register';
 
 type Props = {
   isOpen: boolean;
@@ -44,7 +45,6 @@ const LoginAndRegisterModel = ({ isOpen, onClose }: Props) => {
                   </p>
                 </Tab>
                 <Tab>
-                  {' '}
                   <p className='text-lg font-bold text-secondary border-b-4 border-primary max-w-[200px] text-center mb-4'>
                     הרשמה
                   </p>
@@ -57,7 +57,7 @@ const LoginAndRegisterModel = ({ isOpen, onClose }: Props) => {
                     className='flex  flex-col items-center  justify-center '
                   >
                     <div>
-                      <div className=' flex flex-col gap-4 w-[200px] ןאקצ  md:w-[300px]'>
+                      <div className=' flex flex-col gap-4 w-[200px]   md:w-[300px]'>
                         <div>
                           <input className='input w-full' placeholder='דוא"ל' />
                         </div>
@@ -79,71 +79,7 @@ const LoginAndRegisterModel = ({ isOpen, onClose }: Props) => {
                   </div>
                 </TabPanel>
                 <TabPanel>
-                  <div
-                    style={{ overflow: 'hidden' }}
-                    className='flex  flex-col items-center  justify-center '
-                  >
-                    <div className=' flex  gap-4'>
-                      <div className='flex flex-col'>
-                        <p className='text-sm text-secondary font-bold mb-2'>
-                          שם פרטי
-                        </p>
-                        <input className='input w-full' />
-                      </div>
-                      <div className='flex flex-col'>
-                        <p className='text-sm text-secondary font-bold mb-2'>
-                          טלפון&nbsp;
-                          <span className='text-xs text-gray-400'>
-                            (אופציונלי)
-                          </span>
-                        </p>
-                        <input className='input w-full' />
-                      </div>
-                    </div>
-                    <div className=' flex  gap-4'>
-                      <div className='flex flex-col'>
-                        <p className='text-sm text-secondary font-bold mb-2'>
-                          שם משפחה
-                        </p>
-                        <input className='input w-full' />
-                      </div>
-                      <div className='flex flex-col'>
-                        <p className='text-sm text-secondary font-bold mb-2'>
-                          ישוב&nbsp;
-                          <span className='text-xs text-gray-400'>
-                            (אופציונלי)
-                          </span>
-                        </p>
-                        <input className='input w-full' />
-                      </div>
-                    </div>
-                    <div className=' flex  gap-4'>
-                      <div className='flex flex-col'>
-                        <p className='text-sm text-secondary font-bold mb-2'>
-                          איימיל
-                        </p>
-                        <input className='input w-full' />
-                      </div>
-                      <div className='flex flex-col'>
-                        <p className='text-sm text-secondary font-bold mb-2'>
-                          טלפון&nbsp;
-                          <span className='text-xs text-gray-400'>
-                            (אופציונלי)
-                          </span>
-                        </p>
-                        <input className='input w-full' />
-                      </div>
-                    </div>
-                    <div className='mt-4 flex gap-1 '>
-                      <input type='checkbox' />
-                      <p className='text-xs text-secondary'>
-                        אני מאשר\ת את תנאי השימוש באנציקלופרח
-                      </p>
-                    </div>
-                    <div className='w-full px-20 mt-6'>
-                      <button className='button-primary w-full'>הירשם</button>
-                    </div>
-                  </div>
+                  <Register />
                 </TabPanel>
               </TabPanels>
             </Tabs>

@@ -2,21 +2,21 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+const baseURL = process.env.SERVER_BASE_URL;
 let headers = {};
 
 headers.Authorization = `Bearer ${cookie.get('token')}`;
 const axiosInstance = axios.create({
   baseURL: baseURL,
-  // headers,
-  // withCredentials: true,
+  headers,
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = cookie.get('token');
     if (token) {
-      // config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },

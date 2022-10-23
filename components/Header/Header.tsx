@@ -7,6 +7,7 @@ import account from '../../images/account.png';
 import Cookies from 'universal-cookie';
 import MenuIcon from '../MenuIcon/Menu';
 import LoginAndRegisterModel from '../LoginAndRegisterModel/LoginAndRegisterModel';
+import Link from 'next/link';
 
 const cookies = new Cookies();
 
@@ -66,7 +67,7 @@ const Header = () => {
           onClick={() => handleMenuId(0)}
           className={`${menuId === 0 ? 'text-primary' : ''} cursor-pointer`}
         >
-          בית
+          <Link href='/'>בית</Link>
         </div>
         <div>|</div>
         <div
@@ -80,7 +81,7 @@ const Header = () => {
           onClick={() => handleMenuId(2)}
           className={`${menuId === 2 ? 'text-primary' : ''} cursor-pointer`}
         >
-          חיפוש צמח
+          <Link href='/search'>חיפוש צמח</Link>
         </div>
         <div>|</div>
         <div

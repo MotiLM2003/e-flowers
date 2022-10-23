@@ -15,6 +15,12 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "apis/userAPI.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "apis/userAPI.js",
+    "components/Register/validation.js"
+  ],
   "exclude": ["node_modules"]
 }
