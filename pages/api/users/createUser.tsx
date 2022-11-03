@@ -44,8 +44,7 @@ export default async function handler(
     // )
     //   .then((response) => response.json())
     //   .then((data) => console.log(data));
-  } catch (err) {
-    console.log(err);
+  } catch (err: any) {
+    res.status(err.statusCode).json({ name: 'John Doe' });
   }
-  res.status(200).json({ name: 'John Doe' });
 }

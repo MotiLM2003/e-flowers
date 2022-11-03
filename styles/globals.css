@@ -25,4 +25,9 @@
 
 body {
   direction: rtl;
+  overflow-x: hidden;
+}
+
+.search-rb label span {
+  font-size: 0.8rem;
 }

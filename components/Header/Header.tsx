@@ -91,6 +91,7 @@ const Header = () => {
           שאלות מהקהילה
         </div>
         <div>|</div>
+
         <div
           onClick={() => handleMenuId(4)}
           className={`${menuId === 4 ? 'text-primary' : ''} cursor-pointer`}
@@ -102,28 +103,35 @@ const Header = () => {
           onClick={() => handleMenuId(5)}
           className={`${menuId === 5 ? 'text-primary' : ''} cursor-pointer`}
         >
-          עדכונים
+          <Link href='/support'>תומכים</Link>
         </div>
         <div>|</div>
         <div
           onClick={() => handleMenuId(6)}
           className={`${menuId === 6 ? 'text-primary' : ''} cursor-pointer`}
         >
-          כתבו לנו
+          עדכונים
         </div>
         <div>|</div>
         <div
           onClick={() => handleMenuId(7)}
           className={`${menuId === 7 ? 'text-primary' : ''} cursor-pointer`}
         >
-          תנאי שימוש
+          כתבו לנו
         </div>
         <div>|</div>
         <div
           onClick={() => handleMenuId(8)}
           className={`${menuId === 8 ? 'text-primary' : ''} cursor-pointer`}
         >
-          אודות
+          תנאי שימוש
+        </div>
+        <div>|</div>
+        <div
+          onClick={() => handleMenuId(9)}
+          className={`${menuId === 9 ? 'text-primary' : ''} cursor-pointer`}
+        >
+          <Link href='/about'>אודות</Link>
         </div>
       </nav>
       <LoginAndRegisterModel
