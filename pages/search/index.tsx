@@ -159,15 +159,17 @@ const Search = () => {
               </div>
             </div>
           </div>
-          <div className='w-[90%] md:w-[40%] mt-1 md:mt-[3rem] rounded'>
-            <button className='bg-green p-2 w-full rounded'>חיפוש </button>
+          <div className='w-[90%] md:w-[30%] md:hover:w-[40%] transition-all  mt-1 md:mt-[3rem] rounded'>
+            <button className='bg-green p-2 w-full rounded hover:bg-dark-green hover:text-white  transition duration-150'>
+              חיפוש{' '}
+            </button>
           </div>
-          <input
+          {/* <input
             accept='image/*'
             id='icon-button-file'
             type='file'
             capture='environment'
-          />
+          /> */}
         </div>
       </div>
     </Layout>
