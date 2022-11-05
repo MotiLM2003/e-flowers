@@ -138,7 +138,18 @@ const Search = () => {
                   <p className='font-bold text-secondary  border-b-4 border-b-primary mb-7 text-md  text-center  '>
                     תכונות ומבנה
                   </p>
-                  <FlowerShape />
+                  <p className='font-bold text-secondary    mb-3 text-sm  text-center  '>
+                    צורות עלה
+                  </p>
+                  <FlowerShape startIngIndex={0} />
+                  <p className='font-bold text-secondary    my-3 text-sm  text-center  '>
+                    סידור עלים
+                  </p>
+                  <FlowerShape startIngIndex={4} />
+                  <p className='font-bold text-secondary    my-3 text-sm  text-center  '>
+                    סידור עלים
+                  </p>
+                  <FlowerShape startIngIndex={5} />
                   <Select cssClass='mt-8'>
                     <>
                       <option>צורת גבעול</option>

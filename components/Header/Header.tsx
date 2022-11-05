@@ -1,17 +1,38 @@
-import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import logo from '../../images/logo.png';
 import heart from '../../images/heart.svg';
-import notifications from '../../images/notifications.png';
 import account from '../../images/account.png';
 import Cookies from 'universal-cookie';
 import MenuIcon from '../MenuIcon/Menu';
 import LoginAndRegisterModel from '../LoginAndRegisterModel/LoginAndRegisterModel';
-import Link from 'next/link';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalBody,
+  ModalCloseButton,
+} from '@chakra-ui/react';
+
+// Icons components
+import NotificationsIcon from '../Icons/NotificationsIcon';
 
 const cookies = new Cookies();
-
+const menuItems = [
+  { text: 'בית', url: '/' },
+  { text: 'זיהוי צמח', url: '/ai' },
+  { text: 'חיפוש צמח', url: '/search' },
+  { text: 'שאלות מהקהילה', url: '/ai' },
+  { text: ' פרסומים ותצפיות', url: '/' },
+  { text: 'תומכים', url: '/support' },
+  { text: 'עדכונים', url: '/ai' },
+  { text: 'כתבו לנו', url: '/ai' },
+  { text: 'תנאי שימוש', url: '/ai' },
+  { text: 'אודות', url: '/about' },
+];
 const Header = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
   const [menuId, setMenuId] = useState(0);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const openLogin = () => setIsLoginOpen(true);
@@ -30,6 +51,32 @@ const Header = () => {
     }
   }, []);
 
+  const renderMenu = (isSeperator: boolean) => {
+    return (
+      <>
+        {menuItems.map((item, index) => {
+          return (
+            <>
+              <div
+                key={index}
+                onClick={() => handleMenuId(index)}
+                className={`${
+                  menuId === index ? 'text-primary' : ''
+                } cursor-pointer ${
+                  !isSeperator
+                    ? 'border-2 border-transparent border-b-orange-100 w-full text-center p-1 pb-3'
+                    : null
+                }`}
+              >
+                <Link href={`${item.url}`}>{item.text}</Link>
+              </div>
+              {isSeperator ? <div>|</div> : ''}
+            </>
+          );
+        })}
+      </>
+    );
+  };
   return (
     <header className='flex flex-col gap-4 default-container pb-2'>
       <div className='flex items-center flex-row-reverse '>
@@ -45,7 +92,7 @@ const Header = () => {
         <div className='flex flex-col items-center justify-center p-2 md:p-4 '>
           <div className='flex gap-2 md:gap-5 align-center justify-center flex-row-reverse'>
             <div className=' cursor-pointer'>
-              <Image src={notifications} alt='Logo' />
+              <NotificationsIcon />
             </div>
             <div
               className=' flex flex-col justify-center items-center  cursor-pointer'
@@ -56,83 +103,14 @@ const Header = () => {
               </div>
               <div className='hidden md:block text-xs'>התחבר \ הרשם</div>
             </div>
-            <div className='md:hidden'>
+            <div className='md:hidden' onClick={() => setIsOpen(true)}>
               <MenuIcon />
             </div>
           </div>
         </div>
       </div>
       <nav className=' gap-2 text-sm px-2 md:px-4 justify-center hidden md:flex'>
-        <div
-          onClick={() => handleMenuId(0)}
-          className={`${menuId === 0 ? 'text-primary' : ''} cursor-pointer`}
-        >
-          <Link href='/'>בית</Link>
-        </div>
-        <div>|</div>
-        <div
-          onClick={() => handleMenuId(1)}
-          className={`${menuId === 1 ? 'text-primary' : ''} cursor-pointer`}
-        >
-          זיהוי צמח
-        </div>
-        <div>|</div>
-        <div
-          onClick={() => handleMenuId(2)}
-          className={`${menuId === 2 ? 'text-primary' : ''} cursor-pointer`}
-        >
-          <Link href='/search'>חיפוש צמח</Link>
-        </div>
-        <div>|</div>
-        <div
-          onClick={() => handleMenuId(3)}
-          className={`${menuId === 3 ? 'text-primary' : ''} cursor-pointer`}
-        >
-          שאלות מהקהילה
-        </div>
-        <div>|</div>
-
-        <div
-          onClick={() => handleMenuId(4)}
-          className={`${menuId === 4 ? 'text-primary' : ''} cursor-pointer`}
-        >
-          פרסומים ותצפיות
-        </div>
-        <div>|</div>
-        <div
-          onClick={() => handleMenuId(5)}
-          className={`${menuId === 5 ? 'text-primary' : ''} cursor-pointer`}
-        >
-          <Link href='/support'>תומכים</Link>
-        </div>
-        <div>|</div>
-        <div
-          onClick={() => handleMenuId(6)}
-          className={`${menuId === 6 ? 'text-primary' : ''} cursor-pointer`}
-        >
-          עדכונים
-        </div>
-        <div>|</div>
-        <div
-          onClick={() => handleMenuId(7)}
-          className={`${menuId === 7 ? 'text-primary' : ''} cursor-pointer`}
-        >
-          כתבו לנו
-        </div>
-        <div>|</div>
-        <div
-          onClick={() => handleMenuId(8)}
-          className={`${menuId === 8 ? 'text-primary' : ''} cursor-pointer`}
-        >
-          תנאי שימוש
-        </div>
-        <div>|</div>
-        <div
-          onClick={() => handleMenuId(9)}
-          className={`${menuId === 9 ? 'text-primary' : ''} cursor-pointer`}
-        >
-          <Link href='/about'>אודות</Link>
-        </div>
+        {renderMenu(true)}
       </nav>
       <LoginAndRegisterModel
         isOpen={isLoginOpen}
@@ -140,6 +118,27 @@ const Header = () => {
           setIsLoginOpen(false);
         }}
       />
+      <Modal
+        isCentered
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        size='2xl'
+      >
+        <ModalOverlay
+          bg='none'
+          backdropFilter='auto'
+          backdropInvert='0%'
+          backdropBlur='5px'
+        />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalBody className='mt-[2rem]'>
+            <nav className='flex flex-col justify-center items-center gap-2 pb-8'>
+              {renderMenu(false)}
+            </nav>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </header>
   );
 };
