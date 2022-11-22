@@ -31,6 +31,8 @@ const menuItems = [
   { text: 'תנאי שימוש', url: '/ai' },
   { text: 'אודות', url: '/about' },
 ];
+
+
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [menuId, setMenuId] = useState(0);

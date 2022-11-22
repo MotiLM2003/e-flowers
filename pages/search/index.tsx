@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Layout from '../../components/Layout/Layout';
 import { motion } from 'framer-motion';
@@ -15,10 +15,112 @@ import map from '../../images/map.png';
 import FlowerShape from './FlowerShape';
 import { Input } from '@chakra-ui/react';
 
+
+
+
+const lifeForm = [
+  "חד-שנתי",
+  "גיאופיט (בצל או פקעת)",
+  "עשבוני רב-שנתי",
+  "שיח",
+  "בן-שיח",
+  "מטפס",
+  "עץ",
+  "צמח מים",
+  "טפיל",
+  "שרכים",
+  "דו-שנתי",
+  "טחבים",
+];
+
+const growAreas = [
+  "חולות",
+  "קרקעות קלות",
+  "בתות",
+  "בתות של הרים גבוהים",
+  "חברות שיחים",
+  "ערבות-שיחים",
+  "קרקעות כבדות",
+  "בתי גידול לחים",
+  "מדבר",
+  "מחשופי סלע קשה",
+  "קירות וחומות",
+  "סביבות חמות - צמחים אוהבי חום",
+  "קרקעות מלוחות",
+  "חורש",
+  "בתה עשבונית ים-תיכונית",
+  "נטע אדם",
+  "שטחים מופרים",
+  "שדות ושטחים מעובדים",
+  "יער",
+  "חוף הים התיכון",
+  "קרקעות עשירות בנוטריינטים",
+  "מחשופי סלע מוצלים",
+  "יער ספר הררי",
+  "בתות טרגקנטיות של הרים גבוהים"
+];
+
+
+const leafShapeList = ["עגול", "מצולע", "חסר גבעול",  "מרובע", "משולש",]
+
+const kozim = ["ענפים","עלים","גבעולים","פירות","פרחים"]
+
+
 // Main component
 const Search = () => {
   const [value, setValue] = React.useState('1');
-  const [state, setState] = useState(() => {});
+  const [state, setState] = useState({
+    "name_text": "",
+    "colors": [
+      ""
+    ],
+    "location_names": [
+      "חוף הגליל"
+    ],
+    "flowering_seasons": [
+     
+    ],
+    "petals": [
+      "חסר עלי כותרת"
+    ],
+    "leaf_shapes": [
+      "פשוט"
+    ],
+    "leaf_edges": [
+      "תמימה"
+    ],
+    "leaf_arrangements": [
+      "מסורגים (עלה אחד בכל מפרק)"
+    ],
+    "life_forms": [
+      "חד-שנתי"
+    ],
+    "habitats": [
+      "חולות"
+    ],
+    "stem_shapes": [
+      "עגול"
+    ],
+    "spine": [
+      "ענפים"
+    ],
+    "red": false,
+    "invasive": false,
+    "danger": false,
+    "rare": false,
+    "protected": false,
+    "page": 1
+  });
+
+
+  const onChange = (name : string, value : boolean) => {
+      // const name = e.taget.name;
+      // const value = e.taget.value;
+      setState({...state, [name] : value});
+    console.log(name);
+  }
+
+
 
   return (
     <Layout>
@@ -47,7 +149,7 @@ const Search = () => {
                     שמירת טבע
                   </p>
                   <div>
-                    <EnvTypes />
+                    <EnvTypes state={state} onChange={onChange} />
                   </div>
                   <div>
                     <Image
@@ -62,10 +164,9 @@ const Search = () => {
                     <Select>
                       <>
                         <option>צורת חיים</option>
-                        <option>בחירה 1</option>
-                        <option>בחירה 2</option>
-                        <option>בחירה 3</option>
-                        <option>בחירה 4</option>
+                       {lifeForm.map((item) => {
+                         return <option key={item} value={item}>{item}</option>
+                       })}
                       </>
                     </Select>
                   </div>
@@ -126,9 +227,9 @@ const Search = () => {
                   <Select>
                     <>
                       <option>בית גידול</option>
-                      <option>בחירה 1</option>
-                      <option>בחירה 2</option>
-                      <option>בחירה 3</option>
+                      {growAreas.map((item) => {
+                         return <option key={item} value={item}>{item}</option>
+                       })}
                     </>
                   </Select>
                 </div>
@@ -153,25 +254,26 @@ const Search = () => {
                   <Select cssClass='mt-8'>
                     <>
                       <option>צורת גבעול</option>
-                      <option>בחירה 1</option>
-                      <option>בחירה 2</option>
-                      <option>בחירה 3</option>
+                      {leafShapeList.map((item) => {
+                         return <option key={item} value={item}>{item}</option>
+                       })}
                     </>
                   </Select>
                   <Select cssClass='mt-10'>
                     <>
                       <option>קוצים</option>
-                      <option>בחירה 1</option>
-                      <option>בחירה 2</option>
-                      <option>בחירה 3</option>
+                      {kozim.map((item) => {
+                         return <option key={item} value={item}>{item}</option>
+                       })}
                     </>
                   </Select>
                 </div>
               </div>
             </div>
           </div>
-          <div className='w-[90%] md:w-[30%] md:hover:w-[40%] transition-all  mt-1 md:mt-[3rem] rounded'>
-            <button className='bg-green p-2 w-full rounded hover:bg-dark-green hover:text-white  transition duration-150'>
+          <div>{JSON.stringify(state)}</div>
+          <div className='w-[90%] md:w-[30%] md:hover:w-[33%]  mt-1 md:mt-[3rem] rounded transition-all duration-500'>
+            <button className='bg-green p-2 w-full rounded hover:bg-dark-green hover:text-white  transition duration-1000'>
               חיפוש{' '}
             </button>
           </div>

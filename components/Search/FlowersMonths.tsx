@@ -24,6 +24,7 @@ const FlowersMonths = () => {
           <div key={index} className='flex-1 text-1'>
             <Checkbox size='sm' colorScheme='orange'>
               {month}
+              
             </Checkbox>
           </div>
         );

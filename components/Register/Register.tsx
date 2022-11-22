@@ -99,7 +99,7 @@ const Register = () => {
       const { data } = await api.post('users/createUser', user);
       console.log(data);
     } catch (err: any) {
-      console.log(err.response);
+      console.log(err);
     }
 
     console.log('succes', errors);

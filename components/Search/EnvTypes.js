@@ -1,39 +1,42 @@
 import React from 'react';
-import { Radio, RadioGroup } from '@chakra-ui/react';
+import { Checkbox } from '@chakra-ui/react';
 
-const EnvTypes = () => {
-  const [value, setValue] = React.useState('1');
-  return (
-    <RadioGroup onChange={setValue} value={value} className='search-rb'>
-      <div className='flex flex-reverse flex-wrap max-w-[180px] justify-center gap-3'>
-        <div>
-          <Radio size='sm' colorScheme='orange' value='1'>
-            אדום
-          </Radio>
+
+const list = ["אדום", "מוגן", "פולש", "נדיר", "בסיכון"]
+
+  
+const EnvTypes = ({state, onChange}) => {
+    const [value, setValue] = React.useState('1');
+    return ( 
+        <div className='flex flex-wrap  gap-2 w-[180px] justify-center'>
+         <Checkbox  size='sm' colorScheme='orange' isChecked={state.red} onChange={(e)=> {
+            console.log(e.target.checked);
+            onChange('red', e.target.checked);
+         }}>
+         אדום
+      </Checkbox>
+      <Checkbox  size='sm' colorScheme='orange' isChecked={state.protected} onChange={(e)=> {
+        console.log(e.target.checked);
+        onChange('protected', e.target.checked);
+     }}>
+מוגן  </Checkbox>
+<Checkbox  size='sm' colorScheme='orange' isChecked={state.invasive} onChange={(e)=> {
+    console.log(e.target.checked);
+    onChange('invasive', e.target.checked);
+ }}>
+פולש  </Checkbox>
+<Checkbox  size='sm' colorScheme='orange' isChecked={state.rare} onChange={(e)=> {
+    console.log(e.target.checked);
+    onChange('rare', e.target.checked);
+ }}>
+נדיר  </Checkbox>
+<Checkbox  size='sm' colorScheme='orange' isChecked={state.danger} onChange={(e)=> {
+    console.log(e.target.checked);
+    onChange('danger', e.target.checked);
+ }}>
+בסיכון  </Checkbox>   
         </div>
-        <div>
-          <Radio size='sm' colorScheme='orange' value='2'>
-            מוגן
-          </Radio>
-        </div>
-        <div>
-          <Radio size='sm' colorScheme='orange' value='3'>
-            פולש
-          </Radio>
-        </div>
-        <div>
-          <Radio size='sm' colorScheme='orange' value='4'>
-            נדיר
-          </Radio>
-        </div>
-        <div>
-          <Radio size='sm' colorScheme='orange' value='5'>
-            בסיכון
-          </Radio>
-        </div>
-      </div>
-    </RadioGroup>
-  );
+        );
 };
 
-export default EnvTypes;
+export default EnvTypes; 
