@@ -62,7 +62,7 @@ var getShape = function (startIngIndex) {
     }
 };
 var FlowerShape = function (_a) {
-    var startIngIndex = _a.startIngIndex;
+    var startIngIndex = _a.startIngIndex, onShapeChange = _a.onShapeChange;
     var _b = react_1["default"].useState(getShape(startIngIndex)), currentShapes = _b[0], setShape = _b[1];
     return (react_1["default"].createElement("div", null,
         react_1["default"].createElement("div", { className: 'grid grid-cols-3 row-gap grid-cols-reverse gap-1  max-w-[200px] gap-y-6 gap-x-6' }, currentShapes.map(function (shape, index) {
@@ -71,6 +71,7 @@ var FlowerShape = function (_a) {
                     newItem.isActive = !newItem.isActive;
                     currentShapes[index] = newItem;
                     setShape(__spreadArrays(currentShapes));
+                    onShapeChange(newItem.name, newItem.isActive);
                 } },
                 react_1["default"].createElement(image_1["default"], { src: shape.image, objectFit: 'contain', width: 50, height: 50, alt: 'Map Image' })));
         }))));

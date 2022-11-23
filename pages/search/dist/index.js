@@ -81,10 +81,10 @@ var Search = function () {
         colors: [],
         location_names: [],
         flowering_seasons: [],
-        petals: ['חסר עלי כותרת'],
-        leaf_shapes: ['פשוט'],
-        leaf_edges: ['תמימה'],
-        leaf_arrangements: ['מסורגים (עלה אחד בכל מפרק)'],
+        petals: [],
+        leaf_shapes: [],
+        leaf_edges: [],
+        leaf_arrangements: [],
         life_forms: ['חד-שנתי'],
         habitats: ['חולות'],
         stem_shapes: ['עגול'],
@@ -119,6 +119,36 @@ var Search = function () {
             var colors = __spreadArrays(state.colors);
             colors.push(color);
             setState(__assign(__assign({}, state), { colors: colors }));
+        }
+    };
+    var onShapeChange = function (value, isIn) {
+        if (!isIn) {
+            setState(__assign(__assign({}, state), { leaf_shapes: state.leaf_shapes.filter(function (x) { return x !== value; }) }));
+        }
+        else {
+            var leafShape = __spreadArrays(state.leaf_shapes);
+            leafShape.push(value);
+            setState(__assign(__assign({}, state), { leaf_shapes: leafShape }));
+        }
+    };
+    var onArrangementChange = function (value, isIn) {
+        if (!isIn) {
+            setState(__assign(__assign({}, state), { leaf_arrangements: state.leaf_arrangements.filter(function (x) { return x !== value; }) }));
+        }
+        else {
+            var leafShape = __spreadArrays(state.leaf_arrangements);
+            leafShape.push(value);
+            setState(__assign(__assign({}, state), { leaf_arrangements: leafShape }));
+        }
+    };
+    var onEdgesChange = function (value, isIn) {
+        if (!isIn) {
+            setState(__assign(__assign({}, state), { leaf_arrangements: state.leaf_arrangements.filter(function (x) { return x !== value; }) }));
+        }
+        else {
+            var leafShape = __spreadArrays(state.leaf_arrangements);
+            leafShape.push(value);
+            setState(__assign(__assign({}, state), { leaf_arrangements: leafShape }));
         }
     };
     return (react_1["default"].createElement(Layout_1["default"], null,
@@ -181,11 +211,11 @@ var Search = function () {
                             react_1["default"].createElement("div", { className: 'flex flex-col items-center justify-center my-5' },
                                 react_1["default"].createElement("p", { className: 'font-bold text-secondary  border-b-4 border-b-primary mb-7 text-md  text-center  ' }, "\u05EA\u05DB\u05D5\u05E0\u05D5\u05EA \u05D5\u05DE\u05D1\u05E0\u05D4"),
                                 react_1["default"].createElement("p", { className: 'font-bold text-secondary    mb-3 text-sm  text-center  ' }, "\u05E6\u05D5\u05E8\u05D5\u05EA \u05E2\u05DC\u05D4"),
-                                react_1["default"].createElement(FlowerShape_1["default"], { startIngIndex: 0 }),
+                                react_1["default"].createElement(FlowerShape_1["default"], { startIngIndex: 0, onShapeChange: onShapeChange }),
                                 react_1["default"].createElement("p", { className: 'font-bold text-secondary    my-3 text-sm  text-center  ' }, "\u05E1\u05D9\u05D3\u05D5\u05E8 \u05E2\u05DC\u05D9\u05DD"),
-                                react_1["default"].createElement(FlowerShape_1["default"], { startIngIndex: 4 }),
+                                react_1["default"].createElement(FlowerShape_1["default"], { startIngIndex: 4, onShapeChange: onArrangementChange }),
                                 react_1["default"].createElement("p", { className: 'font-bold text-secondary    my-3 text-sm  text-center  ' }, "\u05E1\u05D9\u05D3\u05D5\u05E8 \u05E2\u05DC\u05D9\u05DD"),
-                                react_1["default"].createElement(FlowerShape_1["default"], { startIngIndex: 5 }),
+                                react_1["default"].createElement(FlowerShape_1["default"], { startIngIndex: 5, onShapeChange: onShapeChange }),
                                 react_1["default"].createElement(Select_1["default"], { cssClass: 'mt-8' },
                                     react_1["default"].createElement(react_1["default"].Fragment, null,
                                         react_1["default"].createElement("option", null, "\u05E6\u05D5\u05E8\u05EA \u05D2\u05D1\u05E2\u05D5\u05DC"),

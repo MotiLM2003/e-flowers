@@ -90,10 +90,10 @@ const Search = () => {
 		colors: [],
 		location_names: [],
 		flowering_seasons: [],
-		petals: ['חסר עלי כותרת'],
-		leaf_shapes: ['פשוט'],
-		leaf_edges: ['תמימה'],
-		leaf_arrangements: ['מסורגים (עלה אחד בכל מפרק)'],
+		petals: [],
+		leaf_shapes: [],
+		leaf_edges: [],
+		leaf_arrangements: [],
 		life_forms: ['חד-שנתי'],
 		habitats: ['חולות'],
 		stem_shapes: ['עגול'],
@@ -131,6 +131,45 @@ const Search = () => {
 			const colors: string[] = [...state.colors];
 			colors.push(color);
 			setState({ ...state, colors: colors });
+		}
+	};
+
+	const onShapeChange = (value: string, isIn: boolean) => {
+		if (!isIn) {
+			setState({
+				...state,
+				leaf_shapes: state.leaf_shapes.filter((x) => x !== value),
+			});
+		} else {
+			const leafShape: string[] = [...state.leaf_shapes];
+			leafShape.push(value);
+			setState({ ...state, leaf_shapes: leafShape });
+		}
+	};
+
+	const onArrangementChange = (value: string, isIn: boolean) => {
+		if (!isIn) {
+			setState({
+				...state,
+				leaf_arrangements: state.leaf_arrangements.filter((x) => x !== value),
+			});
+		} else {
+			const leafShape: string[] = [...state.leaf_arrangements];
+			leafShape.push(value);
+			setState({ ...state, leaf_arrangements: leafShape });
+		}
+	};
+
+	const onEdgesChange = (value: string, isIn: boolean) => {
+		if (!isIn) {
+			setState({
+				...state,
+				leaf_arrangements: state.leaf_arrangements.filter((x) => x !== value),
+			});
+		} else {
+			const leafShape: string[] = [...state.leaf_arrangements];
+			leafShape.push(value);
+			setState({ ...state, leaf_arrangements: leafShape });
 		}
 	};
 
@@ -271,15 +310,24 @@ const Search = () => {
 									<p className='font-bold text-secondary    mb-3 text-sm  text-center  '>
 										צורות עלה
 									</p>
-									<FlowerShape startIngIndex={0} />
+									<FlowerShape
+										startIngIndex={0}
+										onShapeChange={onShapeChange}
+									/>
 									<p className='font-bold text-secondary    my-3 text-sm  text-center  '>
 										סידור עלים
 									</p>
-									<FlowerShape startIngIndex={4} />
+									<FlowerShape
+										startIngIndex={4}
+										onShapeChange={onArrangementChange}
+									/>
 									<p className='font-bold text-secondary    my-3 text-sm  text-center  '>
 										סידור עלים
 									</p>
-									<FlowerShape startIngIndex={5} />
+									<FlowerShape
+										startIngIndex={5}
+										onShapeChange={onShapeChange}
+									/>
 									<Select cssClass='mt-8'>
 										<>
 											<option>צורת גבעול</option>

@@ -47,6 +47,7 @@ const shape3 = [
 ];
 type Props = {
 	startIngIndex: number;
+	onShapeChange: (value: string, isIn: boolean) => void;
 };
 
 const getShape = (startIngIndex: number) => {
@@ -59,7 +60,7 @@ const getShape = (startIngIndex: number) => {
 	}
 };
 
-const FlowerShape = ({ startIngIndex }: Props) => {
+const FlowerShape = ({ startIngIndex, onShapeChange }: Props) => {
 	const [currentShapes, setShape] = React.useState(getShape(startIngIndex));
 
 	return (
@@ -77,6 +78,7 @@ const FlowerShape = ({ startIngIndex }: Props) => {
 								newItem.isActive = !newItem.isActive;
 								currentShapes[index] = newItem;
 								setShape([...currentShapes]);
+								onShapeChange(newItem.name, newItem.isActive);
 							}}
 						>
 							<Image
