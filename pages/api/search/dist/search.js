@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var serverAPI_1 = require("../../../apis/serverAPI");
+var serverAPI_1 = require("apis/serverAPI");
 function handler(req, res) {
     return __awaiter(this, void 0, void 0, function () {
         var user, data, err_1;
@@ -44,7 +44,6 @@ function handler(req, res) {
             switch (_a.label) {
                 case 0:
                     user = req.body;
-                    console.log(user);
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
