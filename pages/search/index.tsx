@@ -1,65 +1,64 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Layout from '../../components/Layout/Layout';
+import Layout from 'components/Layout/Layout';
 import { motion } from 'framer-motion';
 import { Radio, RadioGroup } from '@chakra-ui/react';
 
 // Custom components
-import EnvTypes from '../../components/Search/EnvTypes';
-import FlowersMonths from '../../components/Search/FlowersMonths';
-import FlowerColors from '../../components/Search/FlowerColors';
-import Select from '../../components/Select/Select';
+import EnvTypes from 'components/Search/EnvTypes';
+import FlowersMonths from 'components/Search/FlowersMonths';
+import FlowerColors from 'components/Search/FlowerColors';
+import Select from 'components/Select/Select';
 
 // Images
-import map from '../../images/map.png';
+import map from 'images/map.png';
 import FlowerShape from './FlowerShape';
 import { Input } from '@chakra-ui/react';
+import MultipleChoice from 'components/Search/dist/MultipleChoice';
 
 const lifeForm = [
-	'חד-שנתי',
-	'גיאופיט (בצל או פקעת)',
-	'עשבוני רב-שנתי',
-	'שיח',
-	'בן-שיח',
-	'מטפס',
-	'עץ',
-	'צמח מים',
-	'טפיל',
-	'שרכים',
-	'דו-שנתי',
-	'טחבים',
+{name: 'חד-שנתי' ,isActive: false},
+	{name: 'גיאופיט (בצל או פקעת)' ,isActive: false},
+	{name: 'עשבוני רב-שנתי' ,isActive: false},
+	{name: 'שיח' ,isActive: false},
+	{name: 'בן-שיח' ,isActive: false},
+	{name: 'מטפס' ,isActive: false},
+	{name: 'עץ' ,isActive: false},
+	{name: 'צמח מים' ,isActive: false},
+	{name: 'טפיל' ,isActive: false},
+	{name: 'שרכים' ,isActive: false},
+	{name: 'דו-שנתי' ,isActive: false},
+	{name: 'טחבים' ,isActive: false},
 ];
 
 const growAreas = [
-	'חולות',
-	'קרקעות קלות',
-	'בתות',
-	'בתות של הרים גבוהים',
-	'חברות שיחים',
-	'ערבות-שיחים',
-	'קרקעות כבדות',
-	'בתי גידול לחים',
-	'מדבר',
-	'מחשופי סלע קשה',
-	'קירות וחומות',
-	'סביבות חמות - צמחים אוהבי חום',
-	'קרקעות מלוחות',
-	'חורש',
-	'בתה עשבונית ים-תיכונית',
-	'נטע אדם',
-	'שטחים מופרים',
-	'שדות ושטחים מעובדים',
-	'יער',
-	'חוף הים התיכון',
-	'קרקעות עשירות בנוטריינטים',
-	'מחשופי סלע מוצלים',
-	'יער ספר הררי',
-	'בתות טרגקנטיות של הרים גבוהים',
+	{name :'חולות', isActive : false},
+	{name :'בתות', isActive : false},
+	{name :'בתות של הרים גבוהים', isActive : false},
+	{name :'חברות שיחים', isActive : false},
+	{name :'קרקעות כבדות', isActive : false},
+	{name :'בתי גידול לחים', isActive : false},
+	{name :'מדבר', isActive : false},
+	{name :'מחשופי סלע קשה', isActive : false},
+	{name :'קירות וחומות', isActive : false},
+	{name :'סביבות חמות - צמחים אוהבי חום', isActive : false},
+	{name :'קרקעות מלוחות', isActive : false},
+	{name :'חורש', isActive : false},
+	{name :'בתה עשבונית ים-תיכונית', isActive : false},
+	{name :'נטע אדם', isActive : false},
+	{name :'שטחים מופרים', isActive : false},
+	{name :'שדות ושטחים מעובדים', isActive : false},
+	{name :'יער', isActive : false},
+	{name :'חוף הים התיכון', isActive : false},
+	{name :'קרקעות עשירות בנוטריינטים', isActive : false},
+	{name :'מחשופי סלע מוצלים', isActive : false},
+	{name :'יער ספר הררי', isActive : false},
+	{name :'בתות טרגקנטיות של הרים גבוהים', isActive : false},
 ];
 
-const leafShapeList = ['עגול', 'מצולע', 'חסר גבעול', 'מרובע', 'משולש'];
+const leafShapeList = [{name: 'עגול', isActive:false}, {name:  'מצולע', isActive:false}, {name: 'חסר גבעול', isActive:false},{name:  'מרובע',  isActive:false},{name: 'משולש', isActive:false}];
 
-const kozim = ['ענפים', 'עלים', 'גבעולים', 'פירות', 'פרחים'];
+const kozim = [{name:'ענפים',isActive:false}, {name:'עלים',isActive:false},{name: 'גבעולים', isActive:false},{name:'פירות',isActive:false},{name: 'פרחים',isActive:false}];
 
 interface IState {
 	name_text: string;
@@ -94,10 +93,10 @@ const Search = () => {
 		leaf_shapes: [],
 		leaf_edges: [],
 		leaf_arrangements: [],
-		life_forms: ['חד-שנתי'],
-		habitats: ['חולות'],
-		stem_shapes: ['עגול'],
-		spine: ['ענפים'],
+		life_forms: [],
+		habitats: [],
+		stem_shapes: [],
+		spine: [],
 		red: false,
 		invasive: false,
 		danger: false,
@@ -199,7 +198,7 @@ const Search = () => {
 							</div>
 						</div>
 						{/* main container */}
-						<div className='flex flex-col md:gap-5  md:flex-row mt-5 w-full'>
+						<div className='flex flex-col md:gap-5  md:flex-row mt-5 w-full '>
 							<div className='grow-1'>
 								<div className='flex flex-col items-center justify-center my-5'>
 									<p className='font-bold text-secondary  border-b-4 border-b-primary mb-5 text-md  text-center  md:w-[60%] '>
@@ -217,19 +216,23 @@ const Search = () => {
 											alt='Map Image'
 										/>
 									</div>
-									<div className='w-full'>
-										<Select>
-											<>
-												<option>צורת חיים</option>
-												{lifeForm.map((item) => {
-													return (
-														<option key={item} value={item}>
-															{item}
-														</option>
-													);
-												})}
-											</>
-										</Select>
+									<div className='w-full text-center'>
+										<p className='font-bold text-secondary text-center  border-b-4 border-b-primary mb-2 text-md   
+										'>
+											צורות חיים
+										</p>
+										<MultipleChoice list={lifeForm} />
+										<p className='font-bold text-secondary text-center  border-b-4 border-b-primary my-2 text-md   
+										'>
+											צורות גבעול
+										</p>
+										<MultipleChoice list={leafShapeList} />
+										<p className='font-bold text-secondary text-center  border-b-4 border-b-primary my-2 text-md   
+										'>
+											קוצים
+										</p>
+										<MultipleChoice list={kozim} />
+									
 									</div>
 								</div>
 							</div>
@@ -285,21 +288,13 @@ const Search = () => {
 											</div>
 										</RadioGroup>
 									</div>
-									<Select>
-										<>
-											<option>בית גידול</option>
-											{growAreas.map((item) => {
-												return (
-													<option key={item} value={item}>
-														{item}
-													</option>
-												);
-											})}
-										</>
-									</Select>
-									<div style={{ direction: 'ltr' }} className='text-xs'>
+                  <p className='font-bold text-secondary  border-b-4 border-b-primary mb-2 text-md  text-center  md:w-[60%] '>
+											בית גידול
+										</p>
+										<MultipleChoice list={growAreas} />
+									{/* <div style={{ direction: 'ltr' }} className='text-xs'>
 										<pre>{JSON.stringify(state, null, 2)}</pre>
-									</div>
+									</div> */}
 								</div>
 							</div>
 							<div className='grow-1'>
@@ -328,30 +323,8 @@ const Search = () => {
 										startIngIndex={5}
 										onShapeChange={onShapeChange}
 									/>
-									<Select cssClass='mt-8'>
-										<>
-											<option>צורת גבעול</option>
-											{leafShapeList.map((item) => {
-												return (
-													<option key={item} value={item}>
-														{item}
-													</option>
-												);
-											})}
-										</>
-									</Select>
-									<Select cssClass='mt-10'>
-										<>
-											<option>קוצים</option>
-											{kozim.map((item) => {
-												return (
-													<option key={item} value={item}>
-														{item}
-													</option>
-												);
-											})}
-										</>
-									</Select>
+									
+									
 								</div>
 							</div>
 						</div>
