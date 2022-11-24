@@ -15,9 +15,11 @@ import map from 'images/map.png';
 import FlowerShape from './FlowerShape';
 import { Input } from '@chakra-ui/react';
 import MultipleChoice from 'components/Search/dist/MultipleChoice';
+import api from 'apis/userAPI'
+
 
 const lifeForm = [
-{name: 'חד-שנתי' ,isActive: false},
+{name: 'חד-שנתי' ,isActive: true},
 	{name: 'גיאופיט (בצל או פקעת)' ,isActive: false},
 	{name: 'עשבוני רב-שנתי' ,isActive: false},
 	{name: 'שיח' ,isActive: false},
@@ -123,6 +125,7 @@ const Search = () => {
 		}
 	};
 
+
 	const onColorChange = (color: string, isIn: boolean) => {
 		if (!isIn) {
 			setState({ ...state, colors: state.colors.filter((x) => x !== color) });
@@ -130,6 +133,46 @@ const Search = () => {
 			const colors: string[] = [...state.colors];
 			colors.push(color);
 			setState({ ...state, colors: colors });
+		}
+	};
+
+	const onLifeFormChanged = (value: string, isIn: boolean) => {
+		if (!isIn) {
+			setState({ ...state, colors: state.life_forms.filter((x) => x !== value) });
+		} else {
+			const newForm: string[] = [...state.life_forms];
+			newForm.push(value);
+			setState({ ...state, life_forms: newForm });
+		}
+	};
+
+	const onHabitatsChanged = (value: string, isIn: boolean) => {
+		if (!isIn) {
+			setState({ ...state, habitats: state.habitats.filter((x) => x !== value) });
+		} else {
+			const newForm: string[] = [...state.habitats];
+			newForm.push(value);
+			setState({ ...state, habitats: newForm });
+		}
+	};
+
+	const onSteamShapeChanged = (value: string, isIn: boolean) => {
+		if (!isIn) {
+			setState({ ...state, stem_shapes: state.stem_shapes.filter((x) => x !== value) });
+		} else {
+			const newForm: string[] = [...state.stem_shapes];
+			newForm.push(value);
+			setState({ ...state, stem_shapes: newForm });
+		}
+	};
+
+	const onSpineChanged = (value: string, isIn: boolean) => {
+		if (!isIn) {
+			setState({ ...state, spine: state.spine.filter((x) => x !== value) });
+		} else {
+			const newForm: string[] = [...state.spine];
+			newForm.push(value);
+			setState({ ...state, spine: newForm });
 		}
 	};
 
@@ -171,6 +214,19 @@ const Search = () => {
 			setState({ ...state, leaf_arrangements: leafShape });
 		}
 	};
+
+
+
+	const submitForm = async () => {
+		try {
+			
+			const { data} = await api.post('/plants/search'  ,state );
+			console.log('success:', data);
+		} catch(err : any)	{
+          const error = err.response.data;
+		  console.log(error);
+		}
+	}
 
 	return (
 		<Layout>
@@ -221,17 +277,17 @@ const Search = () => {
 										'>
 											צורות חיים
 										</p>
-										<MultipleChoice list={lifeForm} />
+										<MultipleChoice list={lifeForm} onChange={onLifeFormChanged} />
 										<p className='font-bold text-secondary text-center  border-b-4 border-b-primary my-2 text-md   
 										'>
 											צורות גבעול
 										</p>
-										<MultipleChoice list={leafShapeList} />
+										<MultipleChoice list={leafShapeList}  onChange={onSteamShapeChanged} />
 										<p className='font-bold text-secondary text-center  border-b-4 border-b-primary my-2 text-md   
 										'>
 											קוצים
 										</p>
-										<MultipleChoice list={kozim} />
+										<MultipleChoice list={kozim}  onChange={onSpineChanged} />
 									
 									</div>
 								</div>
@@ -291,7 +347,7 @@ const Search = () => {
                   <p className='font-bold text-secondary  border-b-4 border-b-primary mb-2 text-md  text-center  md:w-[60%] '>
 											בית גידול
 										</p>
-										<MultipleChoice list={growAreas} />
+										<MultipleChoice list={growAreas} onChange={onHabitatsChanged} />
 									<div style={{ direction: 'ltr' }} className='text-xs'>
 										<pre>{JSON.stringify(state, null, 2)}</pre>
 									</div>
@@ -331,7 +387,7 @@ const Search = () => {
 					</div>
 
 					<div className='w-[90%] md:w-[30%] md:hover:w-[33%]  mt-1 md:mt-[3rem] rounded transition-all duration-500'>
-						<button className='bg-green p-2 w-full rounded hover:bg-dark-green hover:text-white  transition duration-1000'>
+						<button className='bg-green p-2 w-full rounded hover:bg-dark-green hover:text-white  transition duration-1000' onClick={submitForm}>
 							חיפוש{' '}
 						</button>
 					</div>
