@@ -292,9 +292,9 @@ const Search = () => {
 											בית גידול
 										</p>
 										<MultipleChoice list={growAreas} />
-									{/* <div style={{ direction: 'ltr' }} className='text-xs'>
+									<div style={{ direction: 'ltr' }} className='text-xs'>
 										<pre>{JSON.stringify(state, null, 2)}</pre>
-									</div> */}
+									</div>
 								</div>
 							</div>
 							<div className='grow-1'>
