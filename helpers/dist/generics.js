@@ -14,7 +14,6 @@ exports.__esModule = true;
 exports.removeEmptyValues = void 0;
 exports.removeEmptyValues = function (state) {
     var _a;
-    console.log(state);
     var searchResults = {};
     for (var item in state) {
         var currentITem = item;

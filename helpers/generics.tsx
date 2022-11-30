@@ -1,7 +1,6 @@
 import { IState } from './interfaces';
 
 export const removeEmptyValues = (state: IState) => {
-	console.log(state);
 	let searchResults = {};
 	for (let item in state) {
 		let currentITem = item as keyof typeof state;
