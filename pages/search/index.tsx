@@ -12,9 +12,9 @@ import Select from 'components/Select/Select';
 
 // Images
 import map from 'images/map.png';
-import FlowerShape from './FlowerShape';
+import FlowerShape from 'components/FlowerShape/FlowerShape';
 import { Input } from '@chakra-ui/react';
-import MultipleChoice from 'components/Search/dist/MultipleChoice';
+import MultipleChoice from 'components/Search/MultipleChoice';
 import api from 'apis/userAPI';
 import { removeEmptyValues } from 'helpers/generics';
 
@@ -88,12 +88,12 @@ import { IState } from 'helpers/interfaces';
 
 // Main component
 const Search = () => {
-	const [value, setValue] = React.useState('1');
+	const [value, setValue] = React.useState<string>('1');
 	const [searchResults, setSearchResults] = React.useState<
 		ISearchResult[] | null
 	>(null);
 
-	const [isSubmitting, setIsSubmitting] = React.useState(false);
+	const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
 	const [state, setState] = useState<IState>({
 		name_text: '',
 		colors: [],
@@ -234,7 +234,7 @@ const Search = () => {
 			setIsSubmitting(false);
 			setSearchResults(data.plants);
 		} catch (err: any) {
-			const error = err;
+			const error = err.data;
 			console.log(error);
 			setIsSubmitting(false);
 		}
@@ -398,6 +398,7 @@ const Search = () => {
 											startIngIndex={4}
 											onShapeChange={onArrangementChange}
 										/>
+
 										<p className='font-bold text-secondary    my-3 text-sm  text-center  '>
 											סידור עלים
 										</p>

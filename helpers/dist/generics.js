@@ -14,12 +14,12 @@ exports.__esModule = true;
 exports.removeEmptyValues = void 0;
 exports.removeEmptyValues = function (state) {
     var _a;
-    var _b;
     console.log(state);
     var searchResults = {};
     for (var item in state) {
-        if (((_b = state[item]) === null || _b === void 0 ? void 0 : _b.length) && state[item].length > 0) {
-            searchResults = __assign(__assign({}, searchResults), (_a = {}, _a[item] = state[item], _a));
+        var currentITem = item;
+        if ((currentITem === null || currentITem === void 0 ? void 0 : currentITem.length) && currentITem.length > 0) {
+            searchResults = __assign(__assign({}, searchResults), (_a = {}, _a[item] = currentITem, _a));
         }
     }
     console.log('results', searchResults);
