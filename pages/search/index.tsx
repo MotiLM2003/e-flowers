@@ -15,77 +15,85 @@ import map from 'images/map.png';
 import FlowerShape from './FlowerShape';
 import { Input } from '@chakra-ui/react';
 import MultipleChoice from 'components/Search/dist/MultipleChoice';
-import api from 'apis/userAPI'
-
+import api from 'apis/userAPI';
+import { removeEmptyValues } from 'helpers/generics';
 
 const lifeForm = [
-{name: 'חד-שנתי' ,isActive: true},
-	{name: 'גיאופיט (בצל או פקעת)' ,isActive: false},
-	{name: 'עשבוני רב-שנתי' ,isActive: false},
-	{name: 'שיח' ,isActive: false},
-	{name: 'בן-שיח' ,isActive: false},
-	{name: 'מטפס' ,isActive: false},
-	{name: 'עץ' ,isActive: false},
-	{name: 'צמח מים' ,isActive: false},
-	{name: 'טפיל' ,isActive: false},
-	{name: 'שרכים' ,isActive: false},
-	{name: 'דו-שנתי' ,isActive: false},
-	{name: 'טחבים' ,isActive: false},
+	{ name: 'חד-שנתי', isActive: true },
+	{ name: 'גיאופיט (בצל או פקעת)', isActive: false },
+	{ name: 'עשבוני רב-שנתי', isActive: false },
+	{ name: 'שיח', isActive: false },
+	{ name: 'בן-שיח', isActive: false },
+	{ name: 'מטפס', isActive: false },
+	{ name: 'עץ', isActive: false },
+	{ name: 'צמח מים', isActive: false },
+	{ name: 'טפיל', isActive: false },
+	{ name: 'שרכים', isActive: false },
+	{ name: 'דו-שנתי', isActive: false },
+	{ name: 'טחבים', isActive: false },
 ];
 
 const growAreas = [
-	{name :'חולות', isActive : false},
-	{name :'בתות', isActive : false},
-	{name :'בתות של הרים גבוהים', isActive : false},
-	{name :'חברות שיחים', isActive : false},
-	{name :'קרקעות כבדות', isActive : false},
-	{name :'בתי גידול לחים', isActive : false},
-	{name :'מדבר', isActive : false},
-	{name :'מחשופי סלע קשה', isActive : false},
-	{name :'קירות וחומות', isActive : false},
-	{name :'סביבות חמות - צמחים אוהבי חום', isActive : false},
-	{name :'קרקעות מלוחות', isActive : false},
-	{name :'חורש', isActive : false},
-	{name :'בתה עשבונית ים-תיכונית', isActive : false},
-	{name :'נטע אדם', isActive : false},
-	{name :'שטחים מופרים', isActive : false},
-	{name :'שדות ושטחים מעובדים', isActive : false},
-	{name :'יער', isActive : false},
-	{name :'חוף הים התיכון', isActive : false},
-	{name :'קרקעות עשירות בנוטריינטים', isActive : false},
-	{name :'מחשופי סלע מוצלים', isActive : false},
-	{name :'יער ספר הררי', isActive : false},
-	{name :'בתות טרגקנטיות של הרים גבוהים', isActive : false},
+	{ name: 'חולות', isActive: false },
+	{ name: 'בתות', isActive: false },
+	{ name: 'בתות של הרים גבוהים', isActive: false },
+	{ name: 'חברות שיחים', isActive: false },
+	{ name: 'קרקעות כבדות', isActive: false },
+	{ name: 'בתי גידול לחים', isActive: false },
+	{ name: 'מדבר', isActive: false },
+	{ name: 'מחשופי סלע קשה', isActive: false },
+	{ name: 'קירות וחומות', isActive: false },
+	{ name: 'סביבות חמות - צמחים אוהבי חום', isActive: false },
+	{ name: 'קרקעות מלוחות', isActive: false },
+	{ name: 'חורש', isActive: false },
+	{ name: 'בתה עשבונית ים-תיכונית', isActive: false },
+	{ name: 'נטע אדם', isActive: false },
+	{ name: 'שטחים מופרים', isActive: false },
+	{ name: 'שדות ושטחים מעובדים', isActive: false },
+	{ name: 'יער', isActive: false },
+	{ name: 'חוף הים התיכון', isActive: false },
+	{ name: 'קרקעות עשירות בנוטריינטים', isActive: false },
+	{ name: 'מחשופי סלע מוצלים', isActive: false },
+	{ name: 'יער ספר הררי', isActive: false },
+	{ name: 'בתות טרגקנטיות של הרים גבוהים', isActive: false },
 ];
 
-const leafShapeList = [{name: 'עגול', isActive:false}, {name:  'מצולע', isActive:false}, {name: 'חסר גבעול', isActive:false},{name:  'מרובע',  isActive:false},{name: 'משולש', isActive:false}];
+const leafShapeList = [
+	{ name: 'עגול', isActive: false },
+	{ name: 'מצולע', isActive: false },
+	{ name: 'חסר גבעול', isActive: false },
+	{ name: 'מרובע', isActive: false },
+	{ name: 'משולש', isActive: false },
+];
 
-const kozim = [{name:'ענפים',isActive:false}, {name:'עלים',isActive:false},{name: 'גבעולים', isActive:false},{name:'פירות',isActive:false},{name: 'פרחים',isActive:false}];
+const kozim = [
+	{ name: 'ענפים', isActive: false },
+	{ name: 'עלים', isActive: false },
+	{ name: 'גבעולים', isActive: false },
+	{ name: 'פירות', isActive: false },
+	{ name: 'פרחים', isActive: false },
+];
 
-interface IState {
-	name_text: string;
-	colors: string[];
-	location_names: string[];
-	flowering_seasons: string[];
-	petals: string[];
-	leaf_shapes: string[];
-	leaf_edges: string[];
-	leaf_arrangements: string[];
-	life_forms: string[];
-	habitats: string[];
-	stem_shapes: string[];
-	spine: string[];
-	red: boolean;
-	invasive: boolean;
-	danger: boolean;
-	rare: boolean;
-	protected: boolean;
-	page: number;
+interface ISearchResult {
+	colors: [];
+	commoness: string;
+	heb_name: string;
+	image: string;
+	science_name: string;
 }
+import tempImage from 'images/temp-ai-flower.png';
+import Link from 'next/link';
+import Loader from 'components/Loader/Loader';
+import { IState } from 'helpers/interfaces';
 
 // Main component
 const Search = () => {
 	const [value, setValue] = React.useState('1');
+	const [searchResults, setSearchResults] = React.useState<
+		ISearchResult[] | null
+	>(null);
+
+	const [isSubmitting, setIsSubmitting] = React.useState(false);
 	const [state, setState] = useState<IState>({
 		name_text: '',
 		colors: [],
@@ -107,7 +115,7 @@ const Search = () => {
 		page: 1,
 	});
 
-	const onChange = (name: string, value: any) => {
+	const onChange = <T,>(name: string, value: T) => {
 		setState({ ...state, [name]: value });
 		console.log(name);
 	};
@@ -125,7 +133,6 @@ const Search = () => {
 		}
 	};
 
-
 	const onColorChange = (color: string, isIn: boolean) => {
 		if (!isIn) {
 			setState({ ...state, colors: state.colors.filter((x) => x !== color) });
@@ -138,7 +145,10 @@ const Search = () => {
 
 	const onLifeFormChanged = (value: string, isIn: boolean) => {
 		if (!isIn) {
-			setState({ ...state, colors: state.life_forms.filter((x) => x !== value) });
+			setState({
+				...state,
+				life_forms: state.life_forms.filter((x) => x !== value),
+			});
 		} else {
 			const newForm: string[] = [...state.life_forms];
 			newForm.push(value);
@@ -148,7 +158,10 @@ const Search = () => {
 
 	const onHabitatsChanged = (value: string, isIn: boolean) => {
 		if (!isIn) {
-			setState({ ...state, habitats: state.habitats.filter((x) => x !== value) });
+			setState({
+				...state,
+				habitats: state.habitats.filter((x) => x !== value),
+			});
 		} else {
 			const newForm: string[] = [...state.habitats];
 			newForm.push(value);
@@ -157,13 +170,8 @@ const Search = () => {
 	};
 
 	const onSteamShapeChanged = (value: string, isIn: boolean) => {
-		if (!isIn) {
-			setState({ ...state, stem_shapes: state.stem_shapes.filter((x) => x !== value) });
-		} else {
-			const newForm: string[] = [...state.stem_shapes];
-			newForm.push(value);
-			setState({ ...state, stem_shapes: newForm });
-		}
+		const newForm: string[] = [value];
+		setState({ ...state, stem_shapes: newForm });
 	};
 
 	const onSpineChanged = (value: string, isIn: boolean) => {
@@ -215,190 +223,242 @@ const Search = () => {
 		}
 	};
 
-
-
 	const submitForm = async () => {
+		console.log('state', state);
 		try {
-			
-			const { data} = await api.post('/plants/search'  ,state );
+			setIsSubmitting(true);
+			const values = removeEmptyValues(state);
+
+			const { data } = await api.post('/search', values);
 			console.log('success:', data);
-		} catch(err : any)	{
-          const error = err.response.data;
-		  console.log(error);
+			setIsSubmitting(false);
+			setSearchResults(data.plants);
+		} catch (err: any) {
+			const error = err;
+			console.log(error);
+			setIsSubmitting(false);
 		}
-	}
+	};
 
 	return (
 		<Layout>
-			<div className='default-container'>
-				<div className='flex flex-col justify-center items-center'>
-					<div className='flex items-center justify-center my-5'>
-						<p className='font-bold text-secondary  border-b-4  border-b-primary mb-7 text-2xl  w-[320px] text-center '>
-							חיפוש צמח לפי מאפיינים
-						</p>
-					</div>
-
-					<div className='flex flex-col items-center'>
-						<div className='w-[90%] md:w-[50%]'>
-							<p className='text-secondary mb-2 font-bold text-md'>
-								חיפוש לפי שם צמח
+			<>
+				<Loader text='טוען תוצאות חיפוש...' isLoading={isSubmitting} />
+				<div className='default-container'>
+					<div className='flex flex-col justify-center items-center'>
+						<div className='flex items-center justify-center my-5'>
+							<p className='font-bold text-secondary  border-b-4  border-b-primary mb-7 text-2xl  w-[320px] text-center '>
+								חיפוש צמח לפי מאפיינים
 							</p>
-							<div className='w-full'>
-								<Input
-									placeholder='הקלד שם צמח'
-									value={state.name_text}
-									onChange={(e) => {
-										onChange('name_text', e.target.value);
-									}}
-								/>
-							</div>
 						</div>
-						{/* main container */}
-						<div className='flex flex-col md:gap-5  md:flex-row mt-5 w-full '>
-							<div className='grow-1'>
-								<div className='flex flex-col items-center justify-center my-5'>
-									<p className='font-bold text-secondary  border-b-4 border-b-primary mb-5 text-md  text-center  md:w-[60%] '>
-										שמירת טבע
-									</p>
-									<div>
-										<EnvTypes state={state} onChange={onChange} />
-									</div>
-									<div>
-										<Image
-											src={map}
-											objectFit='contain'
-											width={300}
-											height={300}
-											alt='Map Image'
-										/>
-									</div>
-									<div className='w-full text-center'>
-										<p className='font-bold text-secondary text-center  border-b-4 border-b-primary mb-2 text-md   
-										'>
-											צורות חיים
-										</p>
-										<MultipleChoice list={lifeForm} onChange={onLifeFormChanged} />
-										<p className='font-bold text-secondary text-center  border-b-4 border-b-primary my-2 text-md   
-										'>
-											צורות גבעול
-										</p>
-										<MultipleChoice list={leafShapeList}  onChange={onSteamShapeChanged} />
-										<p className='font-bold text-secondary text-center  border-b-4 border-b-primary my-2 text-md   
-										'>
-											קוצים
-										</p>
-										<MultipleChoice list={kozim}  onChange={onSpineChanged} />
-									
-									</div>
+
+						<div className='flex flex-col items-center'>
+							<div className='w-[90%] md:w-[50%]'>
+								<p className='text-secondary mb-2 font-bold text-md'>
+									חיפוש לפי שם צמח
+								</p>
+								<div className='w-full'>
+									<Input
+										placeholder='הקלד שם צמח'
+										value={state.name_text}
+										onChange={(e) => {
+											onChange('name_text', e.target.value);
+										}}
+									/>
 								</div>
 							</div>
-							<div className='grow-2 flex flex-col items-center'>
-								<div className='flex items-center justify-center my-5 w-full'>
-									<p className='font-bold text-secondary  border-b-4 border-b-primary text-md  text-center   md:w-[60%]  '>
-										פריחה
-									</p>
-								</div>
-
-								<FlowersMonths onMonthChange={onMonthChange} />
-
-								<p className='font-bold text-secondary text-sm  text-center   md:w-[60%]  md:mt-8 mb-3'>
-									צבע פריחה
-								</p>
-								<div className='w-full flex flex-col items-center justify-center'>
-									<FlowerColors onColorChange={onColorChange} />
-									<p className='font-bold text-secondary mt-3 mb-2 text-sm  text-center  md:w-[60%] '>
-										מספר עלי כותרת
-									</p>
-									<div className='mb-[3.2rem]'>
-										<RadioGroup
-											onChange={setValue}
-											value={value}
-											className='search-rb'
-										>
-											<div className='flex flex-reverse  max-w-[180px] justify-center gap-3'>
-												<div>
-													<Radio size='sm' colorScheme='orange' value='1'>
-														1
-													</Radio>
-												</div>
-												<div>
-													<Radio size='sm' colorScheme='orange' value='2'>
-														2
-													</Radio>
-												</div>
-												<div>
-													<Radio size='sm' colorScheme='orange' value='3'>
-														3
-													</Radio>
-												</div>
-												<div>
-													<Radio size='sm' colorScheme='orange' value='4'>
-														4
-													</Radio>
-												</div>
-												<div>
-													<Radio size='sm' colorScheme='orange' value='5'>
-														5
-													</Radio>
-												</div>
-											</div>
-										</RadioGroup>
+							{/* main container */}
+							<div className='flex flex-col md:gap-5  md:flex-row mt-5 w-full '>
+								<div className='grow-1'>
+									<div className='flex flex-col items-center justify-center my-5'>
+										<p className='font-bold text-secondary  border-b-4 border-b-primary mb-5 text-md  text-center  md:w-[60%] '>
+											שמירת טבע
+										</p>
+										<div>
+											<EnvTypes state={state} onChange={onChange} />
+										</div>
+										<div>
+											<Image
+												src={map}
+												objectFit='contain'
+												width={300}
+												height={300}
+												alt='Map Image'
+											/>
+										</div>
+										<div className='w-full text-center'>
+											<p
+												className='font-bold text-secondary text-center  border-b-4 border-b-primary mb-2 text-md   
+										'
+											>
+												צורות חיים
+											</p>
+											<MultipleChoice
+												list={lifeForm}
+												onChange={onLifeFormChanged}
+											/>
+											<p
+												className='font-bold text-secondary text-center  border-b-4 border-b-primary my-2 text-md   
+										'
+											>
+												צורות גבעול
+											</p>
+											<MultipleChoice
+												list={leafShapeList}
+												onChange={onSteamShapeChanged}
+												isSingSelection={true}
+											/>
+											<p
+												className='font-bold text-secondary text-center  border-b-4 border-b-primary my-2 text-md   
+										'
+											>
+												קוצים
+											</p>
+											<MultipleChoice list={kozim} onChange={onSpineChanged} />
+										</div>
 									</div>
-                  <p className='font-bold text-secondary  border-b-4 border-b-primary mb-2 text-md  text-center  md:w-[60%] '>
+								</div>
+								<div className='grow-2 flex flex-col items-center'>
+									<div className='flex items-center justify-center my-5 w-full'>
+										<p className='font-bold text-secondary  border-b-4 border-b-primary text-md  text-center   md:w-[60%]  '>
+											פריחה
+										</p>
+									</div>
+
+									<FlowersMonths onMonthChange={onMonthChange} />
+
+									<p className='font-bold text-secondary text-sm  text-center   md:w-[60%]  md:mt-8 mb-3'>
+										צבע פריחה
+									</p>
+									<div className='w-full flex flex-col items-center justify-center'>
+										<FlowerColors onColorChange={onColorChange} />
+										<p className='font-bold text-secondary mt-3 mb-2 text-sm  text-center  md:w-[60%] '>
+											מספר עלי כותרת
+										</p>
+										<div className='mb-[3.2rem]'>
+											<RadioGroup
+												onChange={setValue}
+												value={value}
+												className='search-rb'
+											>
+												<div className='flex flex-reverse  max-w-[180px] justify-center gap-3'>
+													<div>
+														<Radio size='sm' colorScheme='orange' value='1'>
+															1
+														</Radio>
+													</div>
+													<div>
+														<Radio size='sm' colorScheme='orange' value='2'>
+															2
+														</Radio>
+													</div>
+													<div>
+														<Radio size='sm' colorScheme='orange' value='3'>
+															3
+														</Radio>
+													</div>
+													<div>
+														<Radio size='sm' colorScheme='orange' value='4'>
+															4
+														</Radio>
+													</div>
+													<div>
+														<Radio size='sm' colorScheme='orange' value='5'>
+															5
+														</Radio>
+													</div>
+												</div>
+											</RadioGroup>
+										</div>
+										<p className='font-bold text-secondary  border-b-4 border-b-primary mb-2 text-md  text-center  md:w-[60%] '>
 											בית גידול
 										</p>
-										<MultipleChoice list={growAreas} onChange={onHabitatsChanged} />
-									<div style={{ direction: 'ltr' }} className='text-xs'>
-										<pre>{JSON.stringify(state, null, 2)}</pre>
+										<MultipleChoice
+											list={growAreas}
+											onChange={onHabitatsChanged}
+										/>
+									</div>
+								</div>
+								<div className='grow-1'>
+									<div className='flex flex-col items-center justify-center my-5'>
+										<p className='font-bold text-secondary  border-b-4 border-b-primary mb-7 text-md  text-center  '>
+											תכונות ומבנה
+										</p>
+										<p className='font-bold text-secondary    mb-3 text-sm  text-center  '>
+											צורות עלה
+										</p>
+										<FlowerShape
+											startIngIndex={0}
+											onShapeChange={onShapeChange}
+										/>
+										<p className='font-bold text-secondary    my-3 text-sm  text-center  '>
+											סידור עלים
+										</p>
+										<FlowerShape
+											startIngIndex={4}
+											onShapeChange={onArrangementChange}
+										/>
+										<p className='font-bold text-secondary    my-3 text-sm  text-center  '>
+											סידור עלים
+										</p>
+										<FlowerShape
+											startIngIndex={5}
+											onShapeChange={onShapeChange}
+										/>
 									</div>
 								</div>
 							</div>
-							<div className='grow-1'>
-								<div className='flex flex-col items-center justify-center my-5'>
-									<p className='font-bold text-secondary  border-b-4 border-b-primary mb-7 text-md  text-center  '>
-										תכונות ומבנה
-									</p>
-									<p className='font-bold text-secondary    mb-3 text-sm  text-center  '>
-										צורות עלה
-									</p>
-									<FlowerShape
-										startIngIndex={0}
-										onShapeChange={onShapeChange}
-									/>
-									<p className='font-bold text-secondary    my-3 text-sm  text-center  '>
-										סידור עלים
-									</p>
-									<FlowerShape
-										startIngIndex={4}
-										onShapeChange={onArrangementChange}
-									/>
-									<p className='font-bold text-secondary    my-3 text-sm  text-center  '>
-										סידור עלים
-									</p>
-									<FlowerShape
-										startIngIndex={5}
-										onShapeChange={onShapeChange}
-									/>
-									
-									
-								</div>
-							</div>
 						</div>
-					</div>
 
-					<div className='w-[90%] md:w-[30%] md:hover:w-[33%]  mt-1 md:mt-[3rem] rounded transition-all duration-500'>
-						<button className='bg-green p-2 w-full rounded hover:bg-dark-green hover:text-white  transition duration-1000' onClick={submitForm}>
-							חיפוש{' '}
-						</button>
-					</div>
-					{/* <input
+						<div className='w-[90%] md:w-[30%] md:hover:w-[33%]  mt-1 md:mt-[3rem] rounded transition-all duration-500'>
+							<button
+								className='bg-secondary  text-white p-2 w-full rounded  transition duration-1000'
+								onClick={submitForm}
+							>
+								חיפוש{' '}
+							</button>
+						</div>
+						{/* <input
             accept='image/*'
             id='icon-button-file'
             type='file'
             capture='environment'
           /> */}
+					</div>
+					<div>
+						<div className='flex flex-col'>
+							{searchResults &&
+								searchResults?.map((item, index) => {
+									const currentId = index + 1;
+									return (
+										<Link key={item.heb_name} href='/'>
+											<div className='flex flex-col mb-5 cursor-pointer group'>
+												<div className='flex items-end gap-1 mb-2'>
+													<span className='font-bold text-primary text-xl'>
+														{currentId}
+													</span>
+													<p className='font-bold text-secondary text-sm border-2  border-white border-b-secondary pb-[.5px8'>
+														{item.heb_name}
+													</p>
+												</div>
+												<div className='relative h-[100px] w-[100px] '>
+													<Image
+														src={`https://storage.googleapis.com/ef-prod/plants-images/thumbnails/${item.image}`}
+														layout='fill'
+														width={100}
+														height={100}
+														alt={`${item.heb_name}`}
+														className='rounded-xl '
+													/>
+												</div>
+											</div>
+										</Link>
+									);
+								})}
+						</div>
+					</div>
 				</div>
-			</div>
+			</>
 		</Layout>
 	);
 };

@@ -22,6 +22,6 @@
     "**/*.tsx",
     "apis/userAPI.js",
     "components/Register/validation.js"
-  ],
+, "components/Search/MultipleChoice.jsx"  ],
   "exclude": ["node_modules"]
 }

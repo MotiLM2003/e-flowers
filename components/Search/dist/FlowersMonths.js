@@ -22,7 +22,7 @@ var FlowersMonths = function (_a) {
         return (react_1["default"].createElement("div", { key: index, className: 'flex-1 text-1' },
             react_1["default"].createElement(react_2.Checkbox, { size: 'sm', colorScheme: 'orange', onChange: function (e) {
                     console.log(e.target.checked);
-                    onMonthChange(String(index), e.target.checked);
+                    onMonthChange(String(index + 1), e.target.checked);
                 } }, month)));
     })));
 };

@@ -29,7 +29,7 @@ const FlowersMonths = ({ onMonthChange }: Props) => {
 							colorScheme='orange'
 							onChange={(e) => {
 								console.log(e.target.checked);
-								onMonthChange(String(index), e.target.checked);
+								onMonthChange(String(index + 1), e.target.checked);
 							}}
 						>
 							{month}
