@@ -10,11 +10,8 @@ export default async function handler(
 	res: NextApiResponse
 ) {
 	const searchFilters = req.body;
-	console.log(searchFilters);
 	try {
-		console.log('testing', searchFilters);
 		const { data } = await api.post('/plants/search/', searchFilters);
-		console.log('search filtters', searchFilters);
 		return res.status(200).send(data);
 	} catch (err: any) {
 		// console.log(searchFilters);
