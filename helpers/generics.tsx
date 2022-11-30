@@ -8,8 +8,5 @@ export const removeEmptyValues = (state: IState) => {
 			searchResults = { ...searchResults, [item]: currentITem };
 		}
 	}
-
-	console.log('results', searchResults);
-
 	return searchResults;
 };

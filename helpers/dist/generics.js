@@ -21,6 +21,5 @@ exports.removeEmptyValues = function (state) {
             searchResults = __assign(__assign({}, searchResults), (_a = {}, _a[item] = currentITem, _a));
         }
     }
-    console.log('results', searchResults);
     return searchResults;
 };
