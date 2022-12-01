@@ -5,10 +5,7 @@ type Props = {
 };
 const FlowerColors = ({ onColorChange }: Props) => {
 	const [colors, setColors] = React.useState(globalColors);
-	useEffect(() => {
-		console.log(globalColors);
-		console.log(colors);
-	}, [colors]);
+	useEffect(() => {}, [colors]);
 	return (
 		<div className=''>
 			<div className='grid grid-cols-4 row-gap grid-cols-reverse gap-1  max-w-[200px] gap-y-2 gap-x-4'>

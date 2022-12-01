@@ -221,6 +221,7 @@ const Search = () => {
 	const submitForm = async () => {
 		console.log('state', state);
 		try {
+			setSearchResults(null);
 			setIsSubmitting(true);
 			const values = removeEmptyValues(state);
 			console.log('values', values);
@@ -408,7 +409,7 @@ const Search = () => {
 
 						<div className='w-[90%] md:w-[30%] md:hover:w-[30%]  mt-1 md:mt-[3rem] rounded transition-all duration-500'>
 							<button
-								className='bg-transparent  border-2 border-primary hover:border-transparent  hover:bg-primary blur-[2px]  hover:blur-[0px] text-gray-400 hover:text-white font-bold  p-2 w-full rounded-xl  transition duration-1000'
+								className='bg-transparent  border-2 border-primary hover:border-transparent  hover:bg-primary text-gray-400 hover:text-white font-bold  p-2 w-full rounded-xl  transition duration-150'
 								onClick={submitForm}
 							>
 								התחל חיפוש

@@ -12,10 +12,7 @@ var globalObjects_1 = require("helpers/globalObjects");
 var FlowerColors = function (_a) {
     var onColorChange = _a.onColorChange;
     var _b = react_1["default"].useState(globalObjects_1.globalColors), colors = _b[0], setColors = _b[1];
-    react_1.useEffect(function () {
-        console.log(globalObjects_1.globalColors);
-        console.log(colors);
-    }, [colors]);
+    react_1.useEffect(function () { }, [colors]);
     return (react_1["default"].createElement("div", { className: '' },
         react_1["default"].createElement("div", { className: 'grid grid-cols-4 row-gap grid-cols-reverse gap-1  max-w-[200px] gap-y-2 gap-x-4' }, colors &&
             colors.map(function (item, index) {
