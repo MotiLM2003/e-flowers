@@ -425,31 +425,7 @@ const Search = () => {
 						<div className='flex flex-wrap gap-1 sm:gap-2 md:gap-4 justify-center mt-10'>
 							{searchResults &&
 								searchResults?.map((item, index) => {
-									return (
-										// <Link key={item.heb_name} href='/'>
-										// 	<div className='flex flex-col mb-5 cursor-pointer group'>
-										// 		<div className='flex items-end gap-1 mb-2'>
-										// 			<span className='font-bold text-primary text-xl'>
-										// 				{currentId}
-										// 			</span>
-										// 			<p className='font-bold text-secondary text-sm border-2  border-white border-b-secondary pb-[.5px8'>
-										// 				{item.heb_name}
-										// 			</p>
-										// 		</div>
-										// 		<div className='relative h-[100px] w-[100px] '>
-										// 			<Image
-										// 				src={`https://storage.googleapis.com/ef-prod/plants-images/thumbnails/${item.image}`}
-										// 				layout='fill'
-										// 				width={100}
-										// 				height={100}
-										// 				alt={`${item.heb_name}`}
-										// 				className='rounded-xl '
-										// 			/>
-										// 		</div>
-										// 	</div>
-										// </Link>
-										<SearchCard key={item.heb_name} item={item} />
-									);
+									return <SearchCard key={item.heb_name} item={item} />;
 								})}
 						</div>
 					</div>
