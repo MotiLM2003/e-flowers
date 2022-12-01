@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { ISearchResult } from 'helpers/interfaces';
 import { globalColors } from 'helpers/globalObjects';
 import PageLinesIcon from 'components/Icons/PageLinesIcon';
-import FlaskIcon from 'components/Icons/flaskIcon';
+import FlaskIcon from 'components/Icons/FlaskIcon';
 
 interface Props {
 	item: ISearchResult;
@@ -17,6 +17,7 @@ const SearchCard = ({ item }: Props) => {
 			images.forEach(function (img) {
 				img.onerror = function () {
 					this.style.display = 'none';
+					console.log('hi');
 				};
 			});
 		});

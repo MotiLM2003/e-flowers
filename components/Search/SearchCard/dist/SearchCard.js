@@ -3,7 +3,7 @@ exports.__esModule = true;
 /* eslint-disable @next/next/no-img-element */
 var react_1 = require("react");
 var PageLinesIcon_1 = require("components/Icons/PageLinesIcon");
-var flaskIcon_1 = require("components/Icons/flaskIcon");
+var FlaskIcon_1 = require("components/Icons/FlaskIcon");
 var SearchCard = function (_a) {
     var item = _a.item;
     react_1.useEffect(function () {
@@ -13,6 +13,7 @@ var SearchCard = function (_a) {
             images.forEach(function (img) {
                 img.onerror = function () {
                     this.style.display = 'none';
+                    console.log('hi');
                 };
             });
         });
@@ -24,7 +25,7 @@ var SearchCard = function (_a) {
                 react_1["default"].createElement(PageLinesIcon_1["default"], { size: 20, color: '#0f4871' }),
                 react_1["default"].createElement("h2", { className: 'font-bold text-lg text-primary' }, item.heb_name)),
             react_1["default"].createElement("div", { className: 'flex items-center gap-4' },
-                react_1["default"].createElement(flaskIcon_1["default"], { size: 20, color: '#0f4871' }),
+                react_1["default"].createElement(FlaskIcon_1["default"], { size: 20, color: '#0f4871' }),
                 react_1["default"].createElement("p", { className: 'text-sm  text-secondary font-bold' },
                     "\u05E9\u05DD \u05DE\u05D3\u05E2\u05D9:",
                     react_1["default"].createElement("span", { className: '' },
