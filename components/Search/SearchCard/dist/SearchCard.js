@@ -4,8 +4,8 @@ exports.__esModule = true;
 var react_1 = require("react");
 var SearchCard = function (_a) {
     var item = _a.item;
-    return (react_1["default"].createElement("div", { className: 'flex flex-col items-center w-[20rem] px-2 py-5\r\n          bg-white rounded-xl transform transition-all hover:-translate-y-2 shadow hover:shadow-xl\r\n          duration-300' },
-        react_1["default"].createElement("img", { src: "https://storage.googleapis.com/ef-prod/plants-images/thumbnails/" + item.image, className: 'h-40 object-cover rounded-xl', alt: '' }),
+    return (react_1["default"].createElement("div", { className: 'flex flex-col items-center  w-full sm:w-[20rem]  px-2 py-5 my-4\r\n          bg-white rounded-xl transform transition-all hover:-translate-y-2 shadow hover:shadow-xl\r\n          duration-300 ' },
+        react_1["default"].createElement("img", { src: "https://storage.googleapis.com/ef-prod/plants-images/thumbnails/" + item.image, className: 'h-40 object-cover rounded-xl w-full', alt: '' }),
         react_1["default"].createElement("div", { className: 'p-2' },
             react_1["default"].createElement("h2", { className: 'font-bold text-lg text-primary' }, item.heb_name),
             react_1["default"].createElement("p", { className: 'text-sm  text-secondary' },

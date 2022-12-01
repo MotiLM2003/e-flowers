@@ -10,13 +10,13 @@ interface Props {
 const SearchCard = ({ item }: Props) => {
 	return (
 		<div
-			className='flex flex-col items-center w-[20rem] px-2 py-5
+			className='flex flex-col items-center  w-full sm:w-[20rem]  px-2 py-5 my-4
           bg-white rounded-xl transform transition-all hover:-translate-y-2 shadow hover:shadow-xl
-          duration-300'
+          duration-300 '
 		>
 			<img
 				src={`https://storage.googleapis.com/ef-prod/plants-images/thumbnails/${item.image}`}
-				className='h-40 object-cover rounded-xl'
+				className='h-40 object-cover rounded-xl w-full'
 				alt=''
 			/>
 			<div className='p-2'>
