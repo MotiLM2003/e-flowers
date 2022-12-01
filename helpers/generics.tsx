@@ -5,15 +5,13 @@ export const removeEmptyValues = (state: IState) => {
 	let searchResults = {};
 	let item: keyof typeof state;
 
-	for (item in state) {
-		Object.entries(state).forEach(([key, value]) => {
-			if (typeof value === 'object') {
-				if (value.length > 0) {
-					searchResults = { ...searchResults, [key]: value };
-				}
+	Object.entries(state).forEach(([key, value]) => {
+		if (typeof value === 'object') {
+			if (value.length > 0) {
+				searchResults = { ...searchResults, [key]: value };
 			}
-		});
-	}
+		}
+	});
 
 	return searchResults;
 };

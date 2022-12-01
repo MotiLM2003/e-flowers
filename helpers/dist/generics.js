@@ -16,16 +16,14 @@ exports.removeEmptyValues = function (state) {
     console.log(state);
     var searchResults = {};
     var item;
-    for (item in state) {
-        Object.entries(state).forEach(function (_a) {
-            var _b;
-            var key = _a[0], value = _a[1];
-            if (typeof value === 'object') {
-                if (value.length > 0) {
-                    searchResults = __assign(__assign({}, searchResults), (_b = {}, _b[key] = value, _b));
-                }
+    Object.entries(state).forEach(function (_a) {
+        var _b;
+        var key = _a[0], value = _a[1];
+        if (typeof value === 'object') {
+            if (value.length > 0) {
+                searchResults = __assign(__assign({}, searchResults), (_b = {}, _b[key] = value, _b));
             }
-        });
-    }
+        }
+    });
     return searchResults;
 };

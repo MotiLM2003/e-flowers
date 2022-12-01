@@ -18,3 +18,11 @@ export interface IState {
 	protected: boolean;
 	page: number;
 }
+
+export interface ISearchResult {
+	colors: [];
+	commoness: string;
+	heb_name: string;
+	image: string;
+	science_name: string;
+}
