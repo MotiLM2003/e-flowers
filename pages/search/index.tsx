@@ -19,7 +19,7 @@ import api from 'apis/userAPI';
 import { removeEmptyValues } from 'helpers/generics';
 
 const lifeForm = [
-	{ name: 'חד-שנתי', isActive: true },
+	{ name: 'חד-שנתי', isActive: false },
 	{ name: 'גיאופיט (בצל או פקעת)', isActive: false },
 	{ name: 'עשבוני רב-שנתי', isActive: false },
 	{ name: 'שיח', isActive: false },
@@ -88,6 +88,7 @@ const Search = () => {
 	>(null);
 
 	const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
+
 	const [state, setState] = useState<IState>({
 		name_text: '',
 		colors: [],
