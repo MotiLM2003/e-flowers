@@ -27,6 +27,5 @@ exports.removeEmptyValues = function (state) {
             }
         });
     }
-    console.log('results', searchResults);
     return searchResults;
 };

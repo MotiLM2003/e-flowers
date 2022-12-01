@@ -15,7 +15,5 @@ export const removeEmptyValues = (state: IState) => {
 		});
 	}
 
-	console.log('results', searchResults);
-
 	return searchResults;
 };
