@@ -13,13 +13,20 @@ var __assign = (this && this.__assign) || function () {
 exports.__esModule = true;
 exports.removeEmptyValues = void 0;
 exports.removeEmptyValues = function (state) {
-    var _a;
+    console.log(state);
     var searchResults = {};
-    for (var item in state) {
-        var currentITem = item;
-        if ((currentITem === null || currentITem === void 0 ? void 0 : currentITem.length) && currentITem.length > 0) {
-            searchResults = __assign(__assign({}, searchResults), (_a = {}, _a[item] = currentITem, _a));
-        }
+    var item;
+    for (item in state) {
+        Object.entries(state).forEach(function (_a) {
+            var _b;
+            var key = _a[0], value = _a[1];
+            if (typeof value === 'object') {
+                if (value.length > 0) {
+                    searchResults = __assign(__assign({}, searchResults), (_b = {}, _b[key] = value, _b));
+                }
+            }
+        });
     }
+    console.log('results', searchResults);
     return searchResults;
 };

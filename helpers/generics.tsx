@@ -1,12 +1,21 @@
 import { IState } from './interfaces';
 
 export const removeEmptyValues = (state: IState) => {
+	console.log(state);
 	let searchResults = {};
-	for (let item in state) {
-		let currentITem = item as keyof typeof state;
-		if (currentITem?.length && currentITem.length > 0) {
-			searchResults = { ...searchResults, [item]: currentITem };
-		}
+	let item: keyof typeof state;
+
+	for (item in state) {
+		Object.entries(state).forEach(([key, value]) => {
+			if (typeof value === 'object') {
+				if (value.length > 0) {
+					searchResults = { ...searchResults, [key]: value };
+				}
+			}
+		});
 	}
+
+	console.log('results', searchResults);
+
 	return searchResults;
 };

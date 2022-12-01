@@ -228,7 +228,7 @@ const Search = () => {
 		try {
 			setIsSubmitting(true);
 			const values = removeEmptyValues(state);
-
+			console.log('values', values);
 			const { data } = await api.post('/search', values);
 			console.log('success:', data);
 			setIsSubmitting(false);
