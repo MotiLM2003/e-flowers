@@ -1,27 +1,14 @@
 import React from 'react';
 import { Checkbox, CheckboxGroup, CheckboxIcon } from '@chakra-ui/react';
+import { monthsText } from 'helpers/globalObjects';
 
-const months = [
-	'ינואר',
-	'פברואר',
-	'מרץ',
-	'אפריל',
-	'מאי',
-	'יוני',
-	'יולי',
-	'אוגוסט',
-	'ספטמבר',
-	'אוקטובר',
-	'נובמבר',
-	'דצמבר',
-];
 type Props = {
 	onMonthChange: (month: string, isIn: boolean) => void;
 };
 const FlowersMonths = ({ onMonthChange }: Props) => {
 	return (
 		<div className='grid grid-cols-4  grid-cols-reverse gap-1 '>
-			{months.map((month, index) => {
+			{monthsText.map((month, index) => {
 				return (
 					<div key={index} className='flex-1 text-1'>
 						<Checkbox

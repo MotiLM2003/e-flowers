@@ -12,3 +12,18 @@ export const globalColors = [
 	{ id: 11, color: '#333333', name: 'שחור', isActive: false },
 	{ id: 12, color: '#c2660a', name: 'כתום', isActive: false },
 ];
+
+export const monthsText = [
+	'ינואר',
+	'פברואר',
+	'מרץ',
+	'אפריל',
+	'מאי',
+	'יוני',
+	'יולי',
+	'אוגוסט',
+	'ספטמבר',
+	'אוקטובר',
+	'נובמבר',
+	'דצמבר',
+];

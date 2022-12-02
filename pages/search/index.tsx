@@ -83,9 +83,7 @@ import SearchCard from 'components/Search/SearchCard/SearchCard';
 // Main component
 const Search = () => {
 	const [value, setValue] = React.useState<string>('1');
-	const [searchResults, setSearchResults] = React.useState<
-		ISearchResult[] | null
-	>(null);
+	const [searchResults, setSearchResults] = React.useState<ISearchResult[]>([]);
 	const [isNoResults, setNoResults] = React.useState<boolean>(false);
 	const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
 
@@ -221,7 +219,7 @@ const Search = () => {
 	const submitForm = async () => {
 		console.log('state', state);
 		try {
-			setSearchResults(null);
+			setSearchResults([]);
 			setIsSubmitting(true);
 			setNoResults(false);
 			const values = removeEmptyValues(state);
@@ -436,7 +434,15 @@ const Search = () => {
           /> */}
 					</div>
 					<div>
-						<div className='flex flex-wrap gap-1 sm:gap-2 md:gap-4 justify-center mt-10'>
+						<div
+							id='scrollableDiv'
+							className='flex flex-wrap gap-1 sm:gap-2 md:gap-4 justify-center mt-10'
+						>
+							{searchResults &&
+								searchResults?.map((item, index) => {
+									return <SearchCard key={item.heb_name} item={item} />;
+								})}
+
 							{searchResults &&
 								searchResults?.map((item, index) => {
 									return <SearchCard key={item.heb_name} item={item} />;

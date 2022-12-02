@@ -5,6 +5,7 @@ import { globalColors } from 'helpers/globalObjects';
 import PageLinesIcon from 'components/Icons/PageLinesIcon';
 import FlaskIcon from 'components/Icons/FlaskIcon';
 import PaintBrush from 'components/Icons/PaintBrush';
+import Link from 'next/link';
 
 interface Props {
 	item: ISearchResult;
@@ -21,6 +22,7 @@ const getColors = (color: string): string => {
 
 const SearchCard = ({ item }: Props) => {
 	useEffect(() => {}, []);
+
 	return (
 		<div
 			className='flex flex-col   w-full sm:w-[20rem]  px-2 py-5 my-4
@@ -30,7 +32,7 @@ const SearchCard = ({ item }: Props) => {
 			<img
 				src={`https://storage.googleapis.com/ef-prod/plants-images/thumbnails/${item.image}`}
 				className='h-40 object-cover rounded-xl w-full'
-				alt=''
+				alt='some alt'
 			/>
 			<div className='p-2 flex flex-col justify-center gap-2'>
 				<div className='flex items-center gap-4'>
@@ -48,7 +50,7 @@ const SearchCard = ({ item }: Props) => {
 					<p className='text-sm  text-secondary font-bold flex items-center gap-3'>
 						צבעים בטבע:
 						<div className='flex gap-1 '>
-							{item.colors.map((color) => {
+							{item.colors?.map((color) => {
 								const bgColor = getColors(color);
 
 								return (
@@ -66,13 +68,11 @@ const SearchCard = ({ item }: Props) => {
 				</div>
 			</div>
 			<div className='mt-2 self-center'>
-				<a
-					role='button'
-					href='#'
-					className='text-white transform transition-all duration-300  bg-gradient-to-t from-[#FFA500] to-[#FFD700] hover:from-[#FFD700] hover:to-[#FFA500] px-3 py-1 rounded-md '
-				>
-					בקר בדף הצמח
-				</a>
+				<Link role='button' href={`/plantes/${item.science_name}`}>
+					<div className='text-white transform transition-all cursor-pointer duration-300  bg-gradient-to-t from-[#FFA500] to-[#FFD700] hover:from-[#FFD700] hover:to-[#FFA500] px-3 py-1 rounded-md '>
+						בקר בדף הצמח
+					</div>
+				</Link>
 			</div>
 		</div>
 	);

@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.globalColors = void 0;
+exports.monthsText = exports.globalColors = void 0;
 exports.globalColors = [
     { id: 1, color: '#008000', name: 'ירוק', isActive: true },
     { id: 2, color: '#660022', name: 'בורדו', isActive: false },
@@ -14,4 +14,18 @@ exports.globalColors = [
     { id: 10, color: '#664400', name: 'חום', isActive: false },
     { id: 11, color: '#333333', name: 'שחור', isActive: false },
     { id: 12, color: '#c2660a', name: 'כתום', isActive: false },
+];
+exports.monthsText = [
+    'ינואר',
+    'פברואר',
+    'מרץ',
+    'אפריל',
+    'מאי',
+    'יוני',
+    'יולי',
+    'אוגוסט',
+    'ספטמבר',
+    'אוקטובר',
+    'נובמבר',
+    'דצמבר',
 ];
