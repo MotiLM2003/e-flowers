@@ -86,7 +86,7 @@ const Search = () => {
 	const [searchResults, setSearchResults] = React.useState<
 		ISearchResult[] | null
 	>(null);
-
+	const [isNoResults, setNoResults] = React.useState<boolean>(false);
 	const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
 
 	const [state, setState] = useState<IState>({
@@ -223,6 +223,7 @@ const Search = () => {
 		try {
 			setSearchResults(null);
 			setIsSubmitting(true);
+			setNoResults(false);
 			const values = removeEmptyValues(state);
 			console.log('values', values);
 			const { data } = await api.post('/search', values);
@@ -230,12 +231,16 @@ const Search = () => {
 			setIsSubmitting(false);
 			setSearchResults(data.plants);
 		} catch (err: any) {
-			const error = err.data;
-			console.log(error);
+			const error = err;
+			console.log('error', error);
+			setNoResults(true);
 			setIsSubmitting(false);
 		}
 	};
 
+	useEffect(() => {
+		console.log('no result', isNoResults);
+	}, [isNoResults]);
 	return (
 		<Layout>
 			<>
@@ -415,6 +420,14 @@ const Search = () => {
 								התחל חיפוש
 							</button>
 						</div>
+						{isNoResults && (
+							<div
+								className={`mt-4 border-2 border-white border-b-primary
+							 text-red-500 text-center w-[30%] p-2 rounded-full font-bold text-sm`}
+							>
+								לא נמצאו תוצאות חיפוש.
+							</div>
+						)}
 						{/* <input
             accept='image/*'
             id='icon-button-file'
