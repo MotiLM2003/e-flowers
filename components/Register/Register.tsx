@@ -14,21 +14,19 @@ interface User {
 	sex: string;
 	accept_terms_of_service?: boolean;
 	isFormValid?: boolean;
-	userName: string;
 }
 
 const initialUser: User = {
-	password: '',
-	confirm_password: '',
-	username: '',
-	f_name: '',
-	l_name: '',
-	email: '',
-	phone: '',
-	settlement: '',
-	sex: '',
-	accept_terms_of_service: false,
-	userName: '',
+	password: '123456',
+	confirm_password: '123456',
+	username: 'moti2003',
+	f_name: 'moti',
+	l_name: 'elmakyes',
+	email: 'moti@gmail.com',
+	phone: '036383289',
+	settlement: 'tel aviv',
+	sex: 'זכר',
+	accept_terms_of_service: true,
 };
 
 const Register = () => {
@@ -37,9 +35,12 @@ const Register = () => {
 		...initialUser,
 		accept_terms_of_service: true,
 	});
+	const [isRegisterd, setIsRegistered] = useState<boolean>(false);
+	const [isRegisterError, setIsRegisterError] = useState(false);
 	const onChange = (e: React.FormEvent<HTMLInputElement>) => {
 		const name = e.currentTarget.name;
 		const value = e.currentTarget.value;
+		console.log(name);
 		setUser({ ...user, [name]: value });
 	};
 
@@ -64,10 +65,10 @@ const Register = () => {
 			isValid = false;
 		}
 
-		if (user.userName.length < 1) {
+		if (user.username.length < 1) {
 			console.log('testing');
 			setErrors((prev) => {
-				return { ...prev, userName: 'שם משתמש - חובה' };
+				return { ...prev, username: 'שם משתמש - חובה' };
 			});
 			isValid = false;
 		}
@@ -117,15 +118,16 @@ const Register = () => {
 		});
 
 		if (!validateForm()) return;
-		console.log('here');
+		setIsRegisterError(false);
 		try {
 			const { data } = await api.post('users/createUser', user);
 			console.log(data);
+			console.log('succes', data);
+			setIsRegistered(true);
 		} catch (err: any) {
-			console.log(err);
+			setIsRegisterError(true);
+			console.log(err.response.data.error);
 		}
-
-		console.log('succes', errors);
 	};
 
 	const isError = (p: string) => {
@@ -139,7 +141,20 @@ const Register = () => {
 		return isValid;
 	};
 
-	useEffect(() => {}, [errors]);
+	useEffect(() => {
+		console.log(user);
+	}, [user]);
+
+	if (isRegisterd)
+		return (
+			<div className='flex  flex-col justify-center items-center gap-2 text-primary shadow-sm rounded p-2 '>
+				<p className='text-xl s border-2 border-transparent border-b-primary  pb-[.5px] mb-1'>
+					ההרשמה הושלמה בהצלחה!
+				</p>
+				<p>נרשמת בצלחה, אנא אשר את אשר את המייל ששלחנו אליך לסיום ההרשמה</p>
+				<p className='text-center mb-2'>תודה!</p>
+			</div>
+		);
 	return (
 		<div
 			style={{ overflow: 'hidden' }}
@@ -163,15 +178,6 @@ const Register = () => {
 					</p>
 				</div>
 				<div className='flex flex-col'>
-					<p className='text-sm text-secondary font-bold mb-2'>
-						טלפון&nbsp;
-						<span className='text-xs text-gray-400'>(אופציונלי)</span>
-					</p>
-					<input className='input w-full' />
-				</div>
-			</div>
-			<div className='flex flex-col sm:flex-row   gap-1 sm:gap-4'>
-				<div className='flex flex-col'>
 					<p className='text-sm text-secondary font-bold mb-2'>שם משפחה</p>
 					<input
 						className='input w-full'
@@ -187,19 +193,8 @@ const Register = () => {
 						{errors.l_name}
 					</p>
 				</div>
-				<div className='flex flex-col'>
-					<p className='text-sm text-secondary font-bold mb-2'>
-						ישוב&nbsp;
-						<span className='text-xs text-gray-400'>(אופציונלי)</span>
-					</p>
-					<input
-						className='input w-full'
-						name='settlement'
-						value={user.settlement}
-						onChange={onChange}
-					/>
-				</div>
 			</div>
+
 			<div className='flex flex-col sm:flex-row gap-1 sm:gap-4'>
 				<div className='flex flex-col'>
 					<p className='text-sm text-secondary font-bold mb-2'>איימיל</p>
@@ -235,32 +230,31 @@ const Register = () => {
 					<p className='text-sm text-secondary font-bold mb-2'>שם משתמש</p>
 					<input
 						className='input w-full'
-						name='userName'
-						value={user.userName}
+						name='username'
+						value={user.username}
 						onChange={onChange}
 					/>
 					<p
 						className={`${
-							isError(errors.userName) ? '' : 'hidden'
+							isError(errors.username) ? '' : 'hidden'
 						}bg-red-300 text-sm text-white rounded px-1 p-[.5px] my-1 text-center`}
 					>
-						{errors.userName}
+						{errors.username}
 					</p>
 				</div>
-				<div className='flex flex-col'>
-					<p className='text-sm text-secondary font-bold mb-2'>מגדר&nbsp;</p>
-					<Select>
-						<option value='0'>-- בחר מגדר --</option>
-						<option value='זכר'>זכר</option>
-						<option value='נקבה'>נקבה</option>
-					</Select>
-					<p
-						className={`${
-							isError(errors.sex) ? '' : 'hidden'
-						}bg-red-300 text-sm text-white rounded px-1 p-[.5px] my-1 text-center`}
-					>
-						{errors.sex}
-					</p>
+				<div className='flex flex-col sm:flex-row   gap-1 sm:gap-4'>
+					<div className='flex flex-col'>
+						<p className='text-sm text-secondary font-bold mb-2'>
+							ישוב&nbsp;
+							<span className='text-xs text-gray-400'>(אופציונלי)</span>
+						</p>
+						<input
+							className='input w-full'
+							name='settlement'
+							value={user.settlement}
+							onChange={onChange}
+						/>
+					</div>
 				</div>
 			</div>
 			<div className='flex flex-col'>
@@ -296,6 +290,21 @@ const Register = () => {
 					{errors.password}
 				</p>
 			</div>
+			<div className='flex flex-col'>
+				<p className='text-sm text-secondary font-bold mb-2'>מגדר&nbsp;</p>
+				<Select>
+					<option value='0'>-- בחר מגדר --</option>
+					<option value='זכר'>זכר</option>
+					<option value='נקבה'>נקבה</option>
+				</Select>
+				<p
+					className={`${
+						isError(errors.sex) ? '' : 'hidden'
+					}bg-red-300 text-sm text-white rounded px-1 p-[.5px] my-1 text-center`}
+				>
+					{errors.sex}
+				</p>
+			</div>
 			<div className='mt-4 flex gap-1 '>
 				<input
 					type='checkbox'
@@ -316,9 +325,14 @@ const Register = () => {
 			</p>
 			<div className='w-full px-20 mt-6'>
 				<button className='button-primary w-full' onClick={onSubmit}>
-					הירשם
+					הרשם
 				</button>
 			</div>
+			{isRegisterError && (
+				<div className='mt-5 text-white bg-red-500 p-2 rounded'>
+					ההרשמה נכשלה, אנא בדוק את השדות ונסה שוב.
+				</div>
+			)}
 		</div>
 	);
 };

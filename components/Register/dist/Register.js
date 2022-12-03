@@ -51,25 +51,27 @@ var react_1 = require("@chakra-ui/react");
 var react_2 = require("react");
 var userAPI_1 = require("../../apis/userAPI");
 var initialUser = {
-    password: '',
-    confirm_password: '',
-    username: '',
-    f_name: '',
-    l_name: '',
-    email: '',
-    phone: '',
-    settlement: '',
-    sex: '',
-    accept_terms_of_service: false,
-    userName: ''
+    password: '123456',
+    confirm_password: '123456',
+    username: 'moti2003',
+    f_name: 'moti',
+    l_name: 'elmakyes',
+    email: 'moti@gmail.com',
+    phone: '036383289',
+    settlement: 'tel aviv',
+    sex: 'זכר',
+    accept_terms_of_service: true
 };
 var Register = function () {
     var _a = react_2.useState(initialUser), user = _a[0], setUser = _a[1];
     var _b = react_2.useState(__assign(__assign({}, initialUser), { accept_terms_of_service: true })), errors = _b[0], setErrors = _b[1];
+    var _c = react_2.useState(false), isRegisterd = _c[0], setIsRegistered = _c[1];
+    var _d = react_2.useState(false), isRegisterError = _d[0], setIsRegisterError = _d[1];
     var onChange = function (e) {
         var _a;
         var name = e.currentTarget.name;
         var value = e.currentTarget.value;
+        console.log(name);
         setUser(__assign(__assign({}, user), (_a = {}, _a[name] = value, _a)));
     };
     var onAcceptTerms = function (e) {
@@ -92,10 +94,10 @@ var Register = function () {
             });
             isValid = false;
         }
-        if (user.userName.length < 1) {
+        if (user.username.length < 1) {
             console.log('testing');
             setErrors(function (prev) {
-                return __assign(__assign({}, prev), { userName: 'שם משתמש - חובה' });
+                return __assign(__assign({}, prev), { username: 'שם משתמש - חובה' });
             });
             isValid = false;
         }
@@ -140,7 +142,7 @@ var Register = function () {
                     setErrors(__assign(__assign({}, initialUser), { accept_terms_of_service: true }));
                     if (!validateForm())
                         return [2 /*return*/];
-                    console.log('here');
+                    setIsRegisterError(false);
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -148,14 +150,15 @@ var Register = function () {
                 case 2:
                     data = (_a.sent()).data;
                     console.log(data);
+                    console.log('succes', data);
+                    setIsRegistered(true);
                     return [3 /*break*/, 4];
                 case 3:
                     err_1 = _a.sent();
-                    console.log(err_1);
+                    setIsRegisterError(true);
+                    console.log(err_1.response.data.error);
                     return [3 /*break*/, 4];
-                case 4:
-                    console.log('succes', errors);
-                    return [2 /*return*/];
+                case 4: return [2 /*return*/];
             }
         });
     }); };
@@ -167,7 +170,14 @@ var Register = function () {
         var isValid = /\S+@\S+\.\S+/.test(email);
         return isValid;
     };
-    react_2.useEffect(function () { }, [errors]);
+    react_2.useEffect(function () {
+        console.log(user);
+    }, [user]);
+    if (isRegisterd)
+        return (react_2["default"].createElement("div", { className: 'flex  flex-col justify-center items-center gap-2 text-primary shadow-sm rounded p-2 ' },
+            react_2["default"].createElement("p", { className: 'text-xl s border-2 border-transparent border-b-primary  pb-[.5px] mb-1' }, "\u05D4\u05D4\u05E8\u05E9\u05DE\u05D4 \u05D4\u05D5\u05E9\u05DC\u05DE\u05D4 \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4!"),
+            react_2["default"].createElement("p", null, "\u05E0\u05E8\u05E9\u05DE\u05EA \u05D1\u05E6\u05DC\u05D7\u05D4, \u05D0\u05E0\u05D0 \u05D0\u05E9\u05E8 \u05D0\u05EA \u05D0\u05E9\u05E8 \u05D0\u05EA \u05D4\u05DE\u05D9\u05D9\u05DC \u05E9\u05E9\u05DC\u05D7\u05E0\u05D5 \u05D0\u05DC\u05D9\u05DA \u05DC\u05E1\u05D9\u05D5\u05DD \u05D4\u05D4\u05E8\u05E9\u05DE\u05D4"),
+            react_2["default"].createElement("p", { className: 'text-center mb-2' }, "\u05EA\u05D5\u05D3\u05D4!")));
     return (react_2["default"].createElement("div", { style: { overflow: 'hidden' }, className: 'flex  flex-col items-center  justify-center ' },
         react_2["default"].createElement("div", { className: 'flex flex-col sm:flex-row gap-1 sm:gap-4' },
             react_2["default"].createElement("div", { className: 'flex flex-col' },
@@ -175,20 +185,9 @@ var Register = function () {
                 react_2["default"].createElement("input", { className: 'input w-full', name: 'f_name', value: user.f_name, onChange: onChange }),
                 react_2["default"].createElement("p", { className: (isError(errors.f_name) ? '' : 'hidden') + " bg-red-300 text-sm text-white rounded px-1 p-[.5px] my-1 text-center" }, errors.f_name)),
             react_2["default"].createElement("div", { className: 'flex flex-col' },
-                react_2["default"].createElement("p", { className: 'text-sm text-secondary font-bold mb-2' },
-                    "\u05D8\u05DC\u05E4\u05D5\u05DF\u00A0",
-                    react_2["default"].createElement("span", { className: 'text-xs text-gray-400' }, "(\u05D0\u05D5\u05E4\u05E6\u05D9\u05D5\u05E0\u05DC\u05D9)")),
-                react_2["default"].createElement("input", { className: 'input w-full' }))),
-        react_2["default"].createElement("div", { className: 'flex flex-col sm:flex-row   gap-1 sm:gap-4' },
-            react_2["default"].createElement("div", { className: 'flex flex-col' },
                 react_2["default"].createElement("p", { className: 'text-sm text-secondary font-bold mb-2' }, "\u05E9\u05DD \u05DE\u05E9\u05E4\u05D7\u05D4"),
                 react_2["default"].createElement("input", { className: 'input w-full', name: 'l_name', value: user.l_name, onChange: onChange }),
-                react_2["default"].createElement("p", { className: (isError(errors.l_name) ? '' : 'hidden') + "bg-red-300 text-sm text-white rounded px-1 p-[.5px] my-1 text-center" }, errors.l_name)),
-            react_2["default"].createElement("div", { className: 'flex flex-col' },
-                react_2["default"].createElement("p", { className: 'text-sm text-secondary font-bold mb-2' },
-                    "\u05D9\u05E9\u05D5\u05D1\u00A0",
-                    react_2["default"].createElement("span", { className: 'text-xs text-gray-400' }, "(\u05D0\u05D5\u05E4\u05E6\u05D9\u05D5\u05E0\u05DC\u05D9)")),
-                react_2["default"].createElement("input", { className: 'input w-full', name: 'settlement', value: user.settlement, onChange: onChange }))),
+                react_2["default"].createElement("p", { className: (isError(errors.l_name) ? '' : 'hidden') + "bg-red-300 text-sm text-white rounded px-1 p-[.5px] my-1 text-center" }, errors.l_name))),
         react_2["default"].createElement("div", { className: 'flex flex-col sm:flex-row gap-1 sm:gap-4' },
             react_2["default"].createElement("div", { className: 'flex flex-col' },
                 react_2["default"].createElement("p", { className: 'text-sm text-secondary font-bold mb-2' }, "\u05D0\u05D9\u05D9\u05DE\u05D9\u05DC"),
@@ -202,15 +201,14 @@ var Register = function () {
         react_2["default"].createElement("div", { className: 'flex flex-col sm:flex-row gap-1 sm:gap-4' },
             react_2["default"].createElement("div", { className: 'flex flex-col' },
                 react_2["default"].createElement("p", { className: 'text-sm text-secondary font-bold mb-2' }, "\u05E9\u05DD \u05DE\u05E9\u05EA\u05DE\u05E9"),
-                react_2["default"].createElement("input", { className: 'input w-full', name: 'userName', value: user.userName, onChange: onChange }),
-                react_2["default"].createElement("p", { className: (isError(errors.userName) ? '' : 'hidden') + "bg-red-300 text-sm text-white rounded px-1 p-[.5px] my-1 text-center" }, errors.userName)),
-            react_2["default"].createElement("div", { className: 'flex flex-col' },
-                react_2["default"].createElement("p", { className: 'text-sm text-secondary font-bold mb-2' }, "\u05DE\u05D2\u05D3\u05E8\u00A0"),
-                react_2["default"].createElement(react_1.Select, null,
-                    react_2["default"].createElement("option", { value: '0' }, "-- \u05D1\u05D7\u05E8 \u05DE\u05D2\u05D3\u05E8 --"),
-                    react_2["default"].createElement("option", { value: '\u05D6\u05DB\u05E8' }, "\u05D6\u05DB\u05E8"),
-                    react_2["default"].createElement("option", { value: '\u05E0\u05E7\u05D1\u05D4' }, "\u05E0\u05E7\u05D1\u05D4")),
-                react_2["default"].createElement("p", { className: (isError(errors.sex) ? '' : 'hidden') + "bg-red-300 text-sm text-white rounded px-1 p-[.5px] my-1 text-center" }, errors.sex))),
+                react_2["default"].createElement("input", { className: 'input w-full', name: 'username', value: user.username, onChange: onChange }),
+                react_2["default"].createElement("p", { className: (isError(errors.username) ? '' : 'hidden') + "bg-red-300 text-sm text-white rounded px-1 p-[.5px] my-1 text-center" }, errors.username)),
+            react_2["default"].createElement("div", { className: 'flex flex-col sm:flex-row   gap-1 sm:gap-4' },
+                react_2["default"].createElement("div", { className: 'flex flex-col' },
+                    react_2["default"].createElement("p", { className: 'text-sm text-secondary font-bold mb-2' },
+                        "\u05D9\u05E9\u05D5\u05D1\u00A0",
+                        react_2["default"].createElement("span", { className: 'text-xs text-gray-400' }, "(\u05D0\u05D5\u05E4\u05E6\u05D9\u05D5\u05E0\u05DC\u05D9)")),
+                    react_2["default"].createElement("input", { className: 'input w-full', name: 'settlement', value: user.settlement, onChange: onChange })))),
         react_2["default"].createElement("div", { className: 'flex flex-col' },
             react_2["default"].createElement("div", { className: 'flex flex-col sm:flex-row gap-4 w-[100%]' },
                 react_2["default"].createElement("div", { className: 'flex flex-col' },
@@ -220,11 +218,19 @@ var Register = function () {
                     react_2["default"].createElement("p", { className: 'text-sm text-secondary font-bold mb-2' }, "\u05D0\u05D9\u05DE\u05D5\u05EA \u05E1\u05D9\u05E1\u05DE\u05D4\u00A0"),
                     react_2["default"].createElement("input", { type: 'password', className: 'input w-full', name: 'confirm_password', value: user.confirm_password, onChange: onChange }))),
             react_2["default"].createElement("p", { className: (isError(errors.password) ? '' : 'hidden') + "bg-red-300 text-sm text-white rounded px-1 p-[.5px] my-1 text-center" }, errors.password)),
+        react_2["default"].createElement("div", { className: 'flex flex-col' },
+            react_2["default"].createElement("p", { className: 'text-sm text-secondary font-bold mb-2' }, "\u05DE\u05D2\u05D3\u05E8\u00A0"),
+            react_2["default"].createElement(react_1.Select, null,
+                react_2["default"].createElement("option", { value: '0' }, "-- \u05D1\u05D7\u05E8 \u05DE\u05D2\u05D3\u05E8 --"),
+                react_2["default"].createElement("option", { value: '\u05D6\u05DB\u05E8' }, "\u05D6\u05DB\u05E8"),
+                react_2["default"].createElement("option", { value: '\u05E0\u05E7\u05D1\u05D4' }, "\u05E0\u05E7\u05D1\u05D4")),
+            react_2["default"].createElement("p", { className: (isError(errors.sex) ? '' : 'hidden') + "bg-red-300 text-sm text-white rounded px-1 p-[.5px] my-1 text-center" }, errors.sex)),
         react_2["default"].createElement("div", { className: 'mt-4 flex gap-1 ' },
             react_2["default"].createElement("input", { type: 'checkbox', name: 'accept_terms_of_service', checked: user.accept_terms_of_service, onChange: onAcceptTerms }),
             react_2["default"].createElement("p", { className: 'text-xs text-secondary' }, "\u05D0\u05E0\u05D9 \u05DE\u05D0\u05E9\u05E8\\\u05EA \u05D0\u05EA \u05EA\u05E0\u05D0\u05D9 \u05D4\u05E9\u05D9\u05DE\u05D5\u05E9 \u05D1\u05D0\u05E0\u05E6\u05D9\u05E7\u05DC\u05D5\u05E4\u05E8\u05D7")),
         react_2["default"].createElement("p", { className: (!errors.accept_terms_of_service ? '' : 'hidden') + " w-full  bg-red-300 text-sm text-white rounded px-1 p-[.5px] my-1 text-center" }, "\u05D9\u05E9 \u05DC\u05D0\u05E9\u05E8 \u05D0\u05EA \u05EA\u05E0\u05D0\u05D9 \u05D4\u05E9\u05D9\u05DE\u05D5\u05E9."),
         react_2["default"].createElement("div", { className: 'w-full px-20 mt-6' },
-            react_2["default"].createElement("button", { className: 'button-primary w-full', onClick: onSubmit }, "\u05D4\u05D9\u05E8\u05E9\u05DD"))));
+            react_2["default"].createElement("button", { className: 'button-primary w-full', onClick: onSubmit }, "\u05D4\u05E8\u05E9\u05DD")),
+        isRegisterError && (react_2["default"].createElement("div", { className: 'mt-5 text-white bg-red-500 p-2 rounded' }, "\u05D4\u05D4\u05E8\u05E9\u05DE\u05D4 \u05E0\u05DB\u05E9\u05DC\u05D4, \u05D0\u05E0\u05D0 \u05D1\u05D3\u05D5\u05E7 \u05D0\u05EA \u05D4\u05E9\u05D3\u05D5\u05EA \u05D5\u05E0\u05E1\u05D4 \u05E9\u05D5\u05D1."))));
 };
 exports["default"] = Register;

@@ -8,6 +8,7 @@ import { monthsText } from 'helpers/globalObjects';
 import { globalColors } from 'helpers/globalObjects';
 import link from 'images/link.png';
 import heart from 'images/heart.svg';
+import map from 'images/map-demo.png';
 
 import {
 	leafArrangements,
@@ -237,6 +238,31 @@ const PlanetDetails = ({ data }: Props) => {
 						omnis, rerum harum nihil provident, impedit
 						<br />
 					</article>
+					<div className='flex items-center my-10 gap-5'>
+						<div>
+							<Image
+								src={map}
+								objectFit='contain'
+								width={136}
+								height={323}
+								alt='Map Image'
+							/>
+						</div>
+						<div className='flex flex-col self-start gap-3'>
+							<div className='flex gap-2'>
+								<span className='font-bold '>אזור הצפון: </span>
+								<p>שאר הישוב, דפנה, כרימאל</p>
+							</div>
+							<div className='flex gap-2'>
+								<span className='font-bold '>אזור המרכז: </span>
+								<p>הוד השרון, כפרס סבא</p>
+							</div>
+							<div className='flex gap-2'>
+								<span className='font-bold '>אזור הדרום: </span>
+								<p>נאות סמדר, באר שבע והסביבה</p>
+							</div>
+						</div>
+					</div>
 					<div>
 						<div className='flex justify-center mt-5  md:mt-20'>
 							<p className='font-bold text-secondary  border-b-4 border-b-orange-300 mb-9 text-2xl '>
