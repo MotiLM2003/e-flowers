@@ -14,6 +14,6 @@ export default async function handler(
 		res.status(res.statusCode).json(data);
 	} catch (err: any) {
 		console.log('herror', err.response.data, err.response.data.detail);
-		res.status(err.response.status).json({ error: 'Hello world' });
+		res.status(err.response.status).send({ error: err.response.data.error });
 	}
 }

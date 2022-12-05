@@ -17,6 +17,19 @@ interface User {
 }
 
 const initialUser: User = {
+	password: '',
+	confirm_password: '',
+	username: '',
+	f_name: '',
+	l_name: '',
+	email: '',
+	phone: '',
+	settlement: '',
+	sex: '',
+	accept_terms_of_service: false,
+};
+
+const fakeUser: User = {
 	password: '123456',
 	confirm_password: '123456',
 	username: 'moti2003',
@@ -28,7 +41,6 @@ const initialUser: User = {
 	sex: 'זכר',
 	accept_terms_of_service: true,
 };
-
 const Register = () => {
 	const [user, setUser] = useState<User>(initialUser);
 	const [errors, setErrors] = useState({
@@ -151,7 +163,7 @@ const Register = () => {
 				<p className='text-xl s border-2 border-transparent border-b-primary  pb-[.5px] mb-1'>
 					ההרשמה הושלמה בהצלחה!
 				</p>
-				<p>נרשמת בצלחה, אנא אשר את אשר את המייל ששלחנו אליך לסיום ההרשמה</p>
+				<p>נרשמת בהצלחה, אנא אשר את אשר את המייל ששלחנו אליך לסיום ההרשמה</p>
 				<p className='text-center mb-2'>תודה!</p>
 			</div>
 		);

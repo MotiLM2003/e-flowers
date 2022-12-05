@@ -51,6 +51,18 @@ var react_1 = require("@chakra-ui/react");
 var react_2 = require("react");
 var userAPI_1 = require("../../apis/userAPI");
 var initialUser = {
+    password: '',
+    confirm_password: '',
+    username: '',
+    f_name: '',
+    l_name: '',
+    email: '',
+    phone: '',
+    settlement: '',
+    sex: '',
+    accept_terms_of_service: false
+};
+var fakeUser = {
     password: '123456',
     confirm_password: '123456',
     username: 'moti2003',
@@ -176,7 +188,7 @@ var Register = function () {
     if (isRegisterd)
         return (react_2["default"].createElement("div", { className: 'flex  flex-col justify-center items-center gap-2 text-primary shadow-sm rounded p-2 ' },
             react_2["default"].createElement("p", { className: 'text-xl s border-2 border-transparent border-b-primary  pb-[.5px] mb-1' }, "\u05D4\u05D4\u05E8\u05E9\u05DE\u05D4 \u05D4\u05D5\u05E9\u05DC\u05DE\u05D4 \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4!"),
-            react_2["default"].createElement("p", null, "\u05E0\u05E8\u05E9\u05DE\u05EA \u05D1\u05E6\u05DC\u05D7\u05D4, \u05D0\u05E0\u05D0 \u05D0\u05E9\u05E8 \u05D0\u05EA \u05D0\u05E9\u05E8 \u05D0\u05EA \u05D4\u05DE\u05D9\u05D9\u05DC \u05E9\u05E9\u05DC\u05D7\u05E0\u05D5 \u05D0\u05DC\u05D9\u05DA \u05DC\u05E1\u05D9\u05D5\u05DD \u05D4\u05D4\u05E8\u05E9\u05DE\u05D4"),
+            react_2["default"].createElement("p", null, "\u05E0\u05E8\u05E9\u05DE\u05EA \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4, \u05D0\u05E0\u05D0 \u05D0\u05E9\u05E8 \u05D0\u05EA \u05D0\u05E9\u05E8 \u05D0\u05EA \u05D4\u05DE\u05D9\u05D9\u05DC \u05E9\u05E9\u05DC\u05D7\u05E0\u05D5 \u05D0\u05DC\u05D9\u05DA \u05DC\u05E1\u05D9\u05D5\u05DD \u05D4\u05D4\u05E8\u05E9\u05DE\u05D4"),
             react_2["default"].createElement("p", { className: 'text-center mb-2' }, "\u05EA\u05D5\u05D3\u05D4!")));
     return (react_2["default"].createElement("div", { style: { overflow: 'hidden' }, className: 'flex  flex-col items-center  justify-center ' },
         react_2["default"].createElement("div", { className: 'flex flex-col sm:flex-row gap-1 sm:gap-4' },
